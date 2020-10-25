@@ -9,10 +9,11 @@ const clientSchema = new db.Schema(
       type: String
     },
     email: {
-      type: String
+      type: String,
+      unique: true
     }
   },
   { timestamps: true }
 );
 
-export default db.model("User", clientSchema);
+module.exports = db.model("User", clientSchema);

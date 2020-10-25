@@ -2,9 +2,14 @@ const {
   GraphQLString,
   GraphQLNonNull,
 } = require('graphql');
-const User = require('../../models/User');
+const bcrypt = require('bcrypt');
 
+const User = require('../../models/User');
 const UserType = require('../types/userType');
+
+const {
+  SALT,
+} = process.env;
 
 module.exports = {
   type: new GraphQLNonNull(UserType),
@@ -21,8 +26,11 @@ module.exports = {
   },
   async resolve(value, args) {
     try {
-      const user = await new User(args);
-      return user
+      const { email, password, name } = args;
+      const salt = await bcrypt.genSalt(10)
+      const hashedPassword = await bcrypt.hash(password, salt)
+      const user = await new User({ name, email: email.toLowerCase(), password: hashedPassword })
+      return user.save();
     } catch (ex) {
       throw ex
     }
