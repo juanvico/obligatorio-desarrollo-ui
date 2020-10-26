@@ -17,7 +17,7 @@ function Register() {
             </div>
             <div>
                 <div><TextField required id="name-input" label="Name" /></div>
-                <div><TextField required id="username-input" label="Username" /></div>
+                <div><TextField required id="email-input" label="Email" /></div>
                 <div><TextField required id="password-input" label="Password" /></div>
                 <div><TextField required id="password-input" label="Confirm Password" /></div>
                 <ProceedWithAlternativeLink

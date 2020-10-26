@@ -17,7 +17,7 @@ function Login() {
 				<label>Bienvenido!</label>
 			</div>
 			<div className="login-details">
-				<div><TextField required id="username-input" label="Username" /></div>
+				<div><TextField required id="email-input" label="Email" /></div>
 				<div><TextField required id="password-input" label="Password" type="password" /></div>
 				<ProceedWithAlternativeLink
                      proceed={{

@@ -4,6 +4,7 @@ function UserDetails({ user }) {
     return (
       <div className="user-details-container">
           <label> Published by: {user.name} </label>
+          <label> {user.email}</label>
       </div>
     );
   }

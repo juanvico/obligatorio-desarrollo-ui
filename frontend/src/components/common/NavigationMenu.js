@@ -16,7 +16,7 @@ function NavigatonMenu( {text} ) {
                 <Typography variant="h6" className="menu-title">
                  {text}
                 </Typography>
-                </Toolbar>
+            </Toolbar>
       </AppBar>
         </div>
 	);

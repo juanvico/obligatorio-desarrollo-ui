@@ -11,7 +11,8 @@ function ItemDetailContainer() {
 	const item = {  
         name: "Teapot Set",
 		owner: {
-			name: 'Mary Publisher'
+			name: 'Mary Publisher',
+			email: 'mary@mail.com'
 		},
 		pickUp: {
 
