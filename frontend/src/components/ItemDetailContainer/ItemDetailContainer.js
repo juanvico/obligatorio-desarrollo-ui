@@ -1,5 +1,5 @@
 import React from 'react';
-import NavigationMenu from '../../common/NavigationMenu'
+import NavigationMenu from '../NavigationMenu'
 import Gallery from './components/Gallery/Gallery'
 import PickupDetails from './components/PickupDetails/PickupDetails'
 import UserDetails from './components/UserDetails/UserDetails'

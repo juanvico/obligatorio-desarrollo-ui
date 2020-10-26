@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css'
-import NavigationMenu from '../../common/NavigationMenu'
+import NavigationMenu from '../NavigationMenu'
 import ItemCard from './components/ItemCard/ItemCard';
 
 function Home() {

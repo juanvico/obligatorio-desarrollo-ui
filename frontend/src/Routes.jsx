@@ -4,11 +4,11 @@ import {
     Route,
   } from "react-router-dom";
 
-import Login from './components/screens/Login/Login';
-import Register from './components/screens/Register/Register';
-import Home from './components/screens/Home/Home';
-import ItemDetailContainer from './components/screens/ItemDetailContainer/ItemDetailContainer'
-import AddItemContainer from './components/screens/AddItemContainer/AddItemContainer'
+import Login from './components/Login';
+import Register from './components/Register';
+import Home from './components/Home/Home';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
+import AddItemContainer from './components/AddItemContainer'
 
 const Routes = () => {
     return (
