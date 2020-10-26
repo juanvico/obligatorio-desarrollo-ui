@@ -7,13 +7,14 @@ const MutationType = new GraphQLObjectType({
   name: 'MutationType',
   fields: {
     createUser: require('./mutations/user'),
+    login: require('./mutations/login'),
   }
 });
 
 const QueryType = new GraphQLObjectType({
   name: 'QueryType',
   fields: {
-    user: require('./queries/user'),
+    me: require('./queries/me'),
   }
 });
 

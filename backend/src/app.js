@@ -1,14 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const db = require('mongoose');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema')
 
-var app = express();
+const app = express();
 
 const {
   DB_URI,
@@ -57,4 +58,5 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Listening on port ${port}`));

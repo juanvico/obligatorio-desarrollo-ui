@@ -1,20 +1,17 @@
 const {
-	GraphQLString,
 	GraphQLNonNull
 } = require('graphql');
+const checkAuth = require('../../middlewares/checkAuth');
 
 const UserType = require('../types/userType');
 
 module.exports = {
 	type: new GraphQLNonNull(UserType),
-	args: {
-		userId: {
-			type: new GraphQLNonNull(GraphQLString)
-		}
-	},
-	async resolve(value, args) {
+	args: {},
+	async resolve(_value, _args, context) {
 		try {
-			return value
+			await checkAuth(context)
+			return context.loggedUser
 		}
 		catch (ex) {
 			console.log("Error when getting User", ex.stack);
