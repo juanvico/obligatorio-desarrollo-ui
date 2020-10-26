@@ -1,12 +1,28 @@
 import React from 'react';
 import './Home.css'
 import NavigationMenu from '../../common/NavigationMenu'
+import ItemCard from './components/ItemCard/ItemCard';
 
 function Home() {
+    const items = {
+
+    };
+
     return (
         <div className='home-container'>
             <NavigationMenu/>
-            This is the homepage:  brindando el punto de entrada principal al contenido
+            <div className="home-content">
+                <div className="home-title">
+                    Welcome back to ReBuy! Explore the availability below and start saving the planet one item at a time! 
+                </div>
+                    <div className="home-items">
+                <ItemCard item={{
+                    name: "Teapot Set",
+                    imageURL: "https://www.pexels.com/photo/clear-glass-teapot-set-1362537/",
+                    description: "Mi descripcion es mas larga que el nombre quizas",
+                }}/>
+                </div>
+            </div>
         </div>
 	);
   }
