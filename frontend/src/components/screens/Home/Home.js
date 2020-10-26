@@ -4,10 +4,6 @@ import NavigationMenu from '../../common/NavigationMenu'
 import ItemCard from './components/ItemCard/ItemCard';
 
 function Home() {
-    const items = {
-
-    };
-
     return (
         <div className='home-container'>
             <NavigationMenu/>
@@ -17,6 +13,7 @@ function Home() {
                 </div>
                     <div className="home-items">
                 <ItemCard item={{
+                    id: 1,
                     name: "Teapot Set",
                     imageURL: "https://www.pexels.com/photo/clear-glass-teapot-set-1362537/",
                     description: "Mi descripcion es mas larga que el nombre quizas",

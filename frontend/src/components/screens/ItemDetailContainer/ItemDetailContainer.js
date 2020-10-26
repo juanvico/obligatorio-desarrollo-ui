@@ -9,13 +9,15 @@ function ItemDetailContainer() {
 
 	//TODO: change this hardcoded
 	const item = {  
-		name: 'username',
+        name: "Teapot Set",
 		owner: {
 			name: 'Mary Publisher'
 		},
 		pickUp: {
 
 		},
+		imageURL: "https://www.pexels.com/photo/clear-glass-teapot-set-1362537/",
+		description: "Mi descripcion es mas larga que el nombre quizas",
 		images: []
 	}
 

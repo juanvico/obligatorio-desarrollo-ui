@@ -1,7 +1,5 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import { TextField, Button } from '@material-ui/core';
-import NavigationMenu from '../../common/NavigationMenu'
+import { TextField } from '@material-ui/core';
 import ProceedWithAlternativeLink from '../../common/ProceedWithAlternativeLink/ProceedWithAlternativeLink'
 
 import './Login.css'

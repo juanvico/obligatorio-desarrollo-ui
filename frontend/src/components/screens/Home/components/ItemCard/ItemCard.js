@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +11,13 @@ import Typography from '@material-ui/core/Typography';
 import './ItemCard.css'
 
 function ItemCard({ item }) {  
+
+  const history = useHistory()
+
+  function handleLearnMore(itemId) {
+    history.push("/items/" + {itemId})
+  }
+
     return (
       <Card className="item-card">
         <CardActionArea>
@@ -28,7 +36,7 @@ function ItemCard({ item }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button onClick= {handleLearnMore} size="small" color="primary">
             Learn More
           </Button>
         </CardActions>

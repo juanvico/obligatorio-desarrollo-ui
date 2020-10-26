@@ -4,12 +4,6 @@ import NavigationMenu from '../../common/NavigationMenu'
 
 function AddItemContainer() {
 
-    const item = {
-        name: "Teapot Set",
-        imageURL: "https://www.pexels.com/photo/clear-glass-teapot-set-1362537/",
-        description: "Mi descripcion es mas larga que el nombre quizas",
-    }
-
     return (
         <div className='add-item-container'>
             <NavigationMenu/>
