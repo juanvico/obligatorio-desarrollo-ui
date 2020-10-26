@@ -1,0 +1,11 @@
+.login-container {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+}
+
+.login-title label {
+    color: #7cbc8c;
+    font-size: 20px;
+    font-weight: bold;
+}
