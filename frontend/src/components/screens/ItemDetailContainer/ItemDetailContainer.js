@@ -17,7 +17,7 @@ function ItemDetailContainer() {
 
 		},
 		imageURL: "https://www.pexels.com/photo/clear-glass-teapot-set-1362537/",
-		description: "Mi descripcion es mas larga que el nombre quizas",
+		description: "This is my random description, it is probably a bit random. Oh random? Hardcoded.",
 		images: []
 	}
 

@@ -14,8 +14,8 @@ function ItemCard({ item }) {
 
   const history = useHistory()
 
-  function handleLearnMore(itemId) {
-    history.push("/items/" + {itemId})
+  function handleLearnMore() {
+    history.push("/items/" + item.id)
   }
 
     return (
