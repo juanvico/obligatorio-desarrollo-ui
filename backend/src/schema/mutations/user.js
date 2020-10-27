@@ -3,16 +3,17 @@ const {
   GraphQLNonNull,
 } = require('graphql');
 const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
 const User = require('../../models/User');
-const UserType = require('../types/userType');
+const CreateUserType = require('../types/createUserType');
 
 const {
-  SALT,
+  JWT_SECRET,
 } = process.env;
 
 module.exports = {
-  type: new GraphQLNonNull(UserType),
+  type: new GraphQLNonNull(CreateUserType),
   args: {
     name: {
       type: new GraphQLNonNull(GraphQLString)
@@ -30,7 +31,9 @@ module.exports = {
       const salt = await bcrypt.genSalt(10)
       const hashedPassword = await bcrypt.hash(password, salt)
       const user = await new User({ name, email: email.toLowerCase(), password: hashedPassword })
-      return user.save();
+      await user.save();
+      const token = await jwt.sign({ userId: user._id }, JWT_SECRET);
+      return { name: user.name, email: user.email, token }
     } catch (ex) {
       throw ex
     }
