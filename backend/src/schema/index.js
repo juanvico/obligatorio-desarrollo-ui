@@ -8,6 +8,7 @@ const MutationType = new GraphQLObjectType({
   fields: {
     createUser: require('./mutations/user'),
     login: require('./mutations/login'),
+    createItem: require('./mutations/item'),
   }
 });
 
@@ -15,6 +16,8 @@ const QueryType = new GraphQLObjectType({
   name: 'QueryType',
   fields: {
     me: require('./queries/me'),
+    item: require('./queries/item'),
+    items: require('./queries/items'),
   }
 });
 
