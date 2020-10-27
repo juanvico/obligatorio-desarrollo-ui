@@ -12,9 +12,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-
+const uri = process.env.NODE_ENV === 'production' ? 'https://ui-backend.herokuapp.com/graphql' : 'http://localhost:5000/graphql';
+console.log('ENV= ', uri);
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri,
 });
 
 const authLink = setContext(async (_, { headers }) => {
