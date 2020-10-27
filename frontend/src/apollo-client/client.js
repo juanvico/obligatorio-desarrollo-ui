@@ -3,7 +3,6 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from "@apollo/client/link/error";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  debugger
   if (graphQLErrors)
     graphQLErrors.map(({ message, locations, path }) =>
       console.log(

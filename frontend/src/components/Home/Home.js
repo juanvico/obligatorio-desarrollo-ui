@@ -20,8 +20,7 @@ import { useQuery } from '@apollo/client';
 import AddItemContainer from '../AddItemContainer';
 import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
 import ME from '../../queries/me';
-import { useCookies } from 'react-cookie';
-import { Button } from '@material-ui/core';
+import Feed from '../Feed/Feed';
 
 const drawerWidth = 240;
 
@@ -161,8 +160,8 @@ const Home = () => {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
         <Switch>
+          <Route exact path="/" component={Feed} />
           <Route exact path="/add" component={AddItemContainer} />
           <Route exact path="/items/:id" component={ItemDetailContainer} />
         </Switch>

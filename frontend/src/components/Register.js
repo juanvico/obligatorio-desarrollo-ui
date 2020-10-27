@@ -1,11 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Avatar, TextField, Paper, FormHelperText } from '@material-ui/core';
 import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useMutation } from '@apollo/client';
-import CREATE_USER from '../mutations/createUser';
-import { useCookies, withCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
+
+import CREATE_USER from '../mutations/createUser';
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -135,4 +135,4 @@ const Register = ({ cookies }) => {
 	);
 }
 
-export default withCookies(Register);
+export default Register;
