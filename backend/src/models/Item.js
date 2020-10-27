@@ -5,7 +5,7 @@ const clientSchema = new db.Schema(
     description: {
       type: String,
     },
-    images: {
+    image: {
       type: String
     },
     pickup_location: {

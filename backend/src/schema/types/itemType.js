@@ -15,7 +15,7 @@ module.exports = new GraphQLObjectType({
     description: {
       type: new GraphQLNonNull(GraphQLString)
     },
-    images: {
+    image: {
       type: GraphQLNonNull(GraphQLString)
     },
     pickup_location: {
