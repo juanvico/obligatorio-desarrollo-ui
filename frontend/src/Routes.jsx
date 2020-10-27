@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Route, Switch, useHistory, withRouter } from 'react-router-dom';
 
 import Home from './components/Home/Home';
-import { withCookies } from 'react-cookie';
 import Auth from './components/Auth/Auth';
 import { Typography } from '@material-ui/core';
 
@@ -51,4 +50,4 @@ const Routes = (props) => {
   );
 };
 
-export default withRouter(withCookies(Routes));
+export default withRouter(Routes);

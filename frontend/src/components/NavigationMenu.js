@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { useCookies } from 'react-cookie';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,15 +22,13 @@ const useStyles = makeStyles((theme) => ({
 
 const NavigationMenu = ({ user }) => {
   const classes = useStyles();
-  const [cookies, setCookie, removeCookie] = useCookies(['authorization']);
   const history = useHistory();
 
   const handleLogout = useCallback(
     () => {
-      removeCookie('authorization')
       history.push('/login')
     },
-    [removeCookie, history],
+    [history],
   )
 
   return (

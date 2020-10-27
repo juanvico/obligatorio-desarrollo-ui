@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Register = ({ cookies }) => {
+const Register = () => {
 	const classes = useStyles();
 	const [name, setName] = useState('')
 	const [password, setPassword] = useState('')

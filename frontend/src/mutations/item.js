@@ -9,12 +9,12 @@ const CREATE_ITEM = gql`
      ) {
     createItem(
         description:$description
-        images:$image
+        image:$image
         pickup_location:$pickupLocation
         available_to_pickup:$availableToPickup
         ) {
      description
-      images
+      image
       pickup_location
       available_to_pickup
       user_name

@@ -5,7 +5,7 @@ const ITEMS = gql`
    items {
       _id
       description
-      images
+      image
       pickup_location
       available_to_pickup
       user_name

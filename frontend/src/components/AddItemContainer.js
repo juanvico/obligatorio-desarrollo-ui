@@ -63,9 +63,6 @@ const AddItemContainer = () => {
 
   return (
     <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
-        <AddCircleIcon />
-      </Avatar>
       <Typography component="h1" variant="h5">
         Add a new item
 			</Typography>
