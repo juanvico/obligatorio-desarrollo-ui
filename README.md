@@ -19,20 +19,140 @@ You can find the most recent version of this guide [here](https://github.com/fac
   
   ## Folder Structure
   ```
-my-app/
-  README.md
-  node_modules/
-  package.json
-  public/
-    index.html
-    favicon.ico
-  src/
-    App.css
-    App.js
-    App.test.js
-    index.css
-    index.js
-    logo.svg
+
++---backend
+|   |   .babelrc
+|   |   .env
+|   |   .gitignore
+|   |   package-lock.json
+|   |   package.json
+|   |   
+|   +---.vscode
+|   |       launch.json
+|   |       settings.json
+|   |       
+|   +---public
+|   |   \---stylesheets
+|   |           style.css
+|   |           
+|   \---src
+|       |   app.js
+|       |   
+|       +---middlewares
+|       |       checkAuth.js
+|       |       
+|       +---models
+|       |       Item.js
+|       |       User.js
+|       |       
+|       +---routes
+|       |       index.js
+|       |       
+|       +---schema
+|       |   |   index.js
+|       |   |   
+|       |   +---mutations
+|       |   |       item.js
+|       |   |       login.js
+|       |   |       user.js
+|       |   |       
+|       |   +---queries
+|       |   |       .DS_Store
+|       |   |       item.js
+|       |   |       items.js
+|       |   |       me.js
+|       |   |       
+|       |   \---types
+|       |           .DS_Store
+|       |           createUserType.js
+|       |           itemType.js
+|       |           loginType.js
+|       |           userType.js
+|       |           
+|       \---views
+|               error.jade
+|               index.jade
+|               layout.jade
+|               
+\---frontend
+    |   .gitignore
+    |   package-lock.json
+    |   package.json
+    |   README.md
+    |   
+    +---public
+    |       favicon.ico
+    |       index.html
+    |       logo192.png
+    |       logo512.png
+    |       manifest.json
+    |       robots.txt
+    |       
+    \---src
+        |   App.css
+        |   App.js
+        |   App.test.js
+        |   index.css
+        |   index.js
+        |   logo.svg
+        |   reportWebVitals.js
+        |   Routes.jsx
+        |   setupTests.js
+        |   theme.js
+        |   
+        +---apollo-client
+        |       client.js
+        |       
+        +---components
+        |   |   AddItemContainer.js
+        |   |   Login.js
+        |   |   NavigationMenu.js
+        |   |   Register.js
+        |   |   
+        |   +---Auth
+        |   |       Auth.js
+        |   |       
+        |   +---Feed
+        |   |       Feed.js
+        |   |       
+        |   +---Home
+        |   |   |   Home.js
+        |   |   |   
+        |   |   \---components
+        |   |       \---ItemCard
+        |   |               ItemCard.css
+        |   |               ItemCard.js
+        |   |               
+        |   +---Item
+        |   |       Item.js
+        |   |       
+        |   \---ItemDetailContainer
+        |       |   ItemDetailContainer.css
+        |       |   ItemDetailContainer.js
+        |       |   
+        |       \---components
+        |           +---Gallery
+        |           |       Gallery.js
+        |           |       
+        |           +---PickupDetails
+        |           |       PickupDetails.js
+        |           |       
+        |           \---UserDetails
+        |                   UserDetails.js
+        |                   
+        +---mutations
+        |       createUser.js
+        |       item.js
+        |       login.js
+        |       
+        +---queries
+        |       items.js
+        |       me.js
+        |       
+        \---resources
+            \---imgs
+                    logo.svg
+                    
 ```
 
   ## Available Scripts
