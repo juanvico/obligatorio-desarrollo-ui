@@ -145,7 +145,7 @@ const Home = () => {
         <Divider />
         <List>
           {[{ title: 'Home', to: '/' }, { title: 'Add', to: '/add' }].map((nav, index) => (
-            <ListItem component={Link} key={nav.title} to={nav.to} onClick={handleDrawerClose} >
+            <ListItem button component={Link} key={nav.title} to={nav.to} onClick={handleDrawerClose} >
               <ListItemText primary={nav.title} />
             </ListItem>
           ))}
