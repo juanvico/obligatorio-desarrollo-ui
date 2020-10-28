@@ -96,6 +96,7 @@ const Register = () => {
 					required
 					fullWidth
 					name="password"
+					type="password"
 					label="Password"
 					id="password"
 					value={password}
@@ -107,6 +108,7 @@ const Register = () => {
 					required
 					fullWidth
 					name="password"
+					type="password"
 					label="Confirm Password"
 					id="confirm-password"
 					value={rePassword}
