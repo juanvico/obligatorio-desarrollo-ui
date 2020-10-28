@@ -16,6 +16,16 @@ Runs server at port 4000
 
 ### `npm start:dev`
 
+### Env
+
+Create a `.env` file at root with the following structure:
+
+```
+DB_URI=
+SALT=
+JWT_SECRET=
+```
+
 Runs server at port 4000 with `nodemon`
 
 ### `Database MongoDB`
