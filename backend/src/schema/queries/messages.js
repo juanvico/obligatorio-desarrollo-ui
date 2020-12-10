@@ -5,7 +5,7 @@ const {
   
   const Message = require('../../models/message');
   const MessageType = require('../types/messageType');
-  const UserType = require('../types/userType');
+  // const UserType = require('../types/userType');
 
   module.exports = {
     type: new GraphQLNonNull(GraphQLList(MessageType)),
@@ -13,12 +13,12 @@ const {
     async resolve(_value, _args, context) {
       try {
         await checkAuth(context)
-        const me = context.loggedUser.email
-        const messages = await Message.findAll({ destinatary_user_email: me.toLowerCase() });
+        // const me = context.loggedUser.email
+        const messages = await Message.find({});
         return messages
       }
       catch (ex) {
-        console.log("Error getting items", ex.stack);
+        console.log("Error getting messages", ex.stack);
       }
     }
   };
