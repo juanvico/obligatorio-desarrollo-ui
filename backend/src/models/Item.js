@@ -2,14 +2,23 @@ const db = require("mongoose");
 
 const clientSchema = new db.Schema(
   {
+    title: {
+      type: String
+    },
     description: {
       type: String,
     },
     image: {
       type: String
     },
-    pickup_location: {
-      type: String,
+    pickup_location_latitude: {
+      type: String
+    },
+    pickup_location_longitude: {
+      type: String
+    },
+    pickup_location_description: {
+      type: String
     },
     available_to_pickup: {
       type: Boolean,

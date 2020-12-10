@@ -5,11 +5,13 @@ import Typography from '@material-ui/core/Typography';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
 import ITEMS from '../../queries/items';
 import { useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const Feed = () => {
   const classes = useStyles();
 
+  // eslint-disable-next-line 
   const { loading, error, data } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
 
   if (loading) return 'Loading...';
@@ -52,22 +55,22 @@ const Feed = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  User Details
+                  {tile.title}
                 </Typography>
                 <Typography gutterBottom variant="subtitle2" noWrap >
-                  {tile.user_name}
-                </Typography>
-                <Typography gutterBottom variant="subtitle2" noWrap >
-                  {tile.user_email}
-                </Typography>
+                {tile.description}
+                </Typography>                  
                 <Typography  gutterBottom variant="subtitle2" noWrap >
-                  Pick up: {tile.pickup_location}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" noWrap>
-                  {tile.description}
+                  Pick up: {tile.pickup_location_description}
                 </Typography>
                 <Typography variant="body2" >Available: {tile.available_to_pickup ? 'Yes' : 'No'}</Typography>
+                <Typography variant="body2" color="textSecondary" noWrap>
+                  Posted by: {tile.user_name} ({tile.user_email})
+                </Typography>
               </CardContent>
+                <CardActions>
+                  <Link to="/sendMessage">Contact for pickup coordination</Link>
+               </CardActions>
               </CardActionArea>
             </Card>
             </Grid>
