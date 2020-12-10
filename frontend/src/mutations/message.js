@@ -1,21 +1,21 @@
 import gql from 'graphql-tag';
 
-const CREATE_MESSAGE= gql`
+const CREATE_MESSAGE = gql`
    mutation createMessage(
-     $destinatary_user_email: String!,
-     $item_id: String!,
-     $detail: String!
+     $destinataryUserEmail: String!,
+     $description: String!,
+     $itemId: String!
      ) {
-    createMessage(
-        destinatary_user_email:$destinatary_user_email
-        item_id:$item_id
-        detail:$detail
-        ) 
-         destinatary_user_email
-         item_id
-         detail
-         remitent_user_name
-         remitent_user_email
+      createMessage(
+         destinatary_user_email:$destinataryUserEmail
+         item_id:$itemId
+         detail:$detail
+        ) {
+      destinatary_user_email
+      item_id
+      detail
+      remitent_user_name
+      remitent_user_email
     }
  }
 `;

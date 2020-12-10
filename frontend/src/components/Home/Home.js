@@ -19,6 +19,7 @@ import { useQuery } from '@apollo/client';
 
 import AddItemContainer from '../AddItemContainer';
 import MessagesContainer from '../MessagesContainer';
+import SendMessageContainer from '../SendMessageContainer';
 import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
 import ME from '../../queries/me';
 import Feed from '../Feed/Feed';
@@ -164,6 +165,7 @@ const Home = () => {
         <Switch>
           <Route exact path="/" component={Feed} />
           <Route exact path="/add" component={AddItemContainer} />
+          <Route exact path="/sendMessage" component={SendMessageContainer} />
           <Route exact path="/messages" component={MessagesContainer} />
           <Route exact path="/items/:id" component={ItemDetailContainer} />
         </Switch>

@@ -4,6 +4,9 @@ import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/LockOutlined';
 import { useMutation } from '@apollo/client';
 
+import ITEM from '../queries/item';
+import { useQuery } from '@apollo/client';
+
 import CREATE_MESSAGE from '../mutations/message';
 import { useHistory } from 'react-router-dom';
 
@@ -30,33 +33,39 @@ const useStyles = makeStyles((theme) => ({
 
 const SendMessageContainer = () => {
   const classes = useStyles();
-  const [details, setDetails] = useState('')
+  const destinataryUserEmail = useState('')
+  const itemId = useState('')
+  const [description, setDescription] = useState('')
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const history = useHistory()
 
+  // const { fetchedLoading, fetchededData } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
   const [createMessage, { data, error, loading }] = useMutation(CREATE_MESSAGE, { fetchPolicy: 'no-cache' });
 
+  // if (fetchedLoading) return 'Loading...';
+
   if (data?.createMessage) {
-    history.push('/')
+    history.push('/messages')
   }
 
   const handleAddition = useCallback(
     async () => {
       try {
-        if (details === '') setErrors([true, 'Enter details'])
-        else await createMessage({ variables: { details } })
+        if (description === '') setErrors([true, 'Enter message to send!'])
+        else await createMessage({ variables: { destinataryUserEmail, description, itemId } })
       } catch (error) {
         console.log(error)
       }
     },
-    [details,
-      createMessage,
+    [destinataryUserEmail,
+      description,
+      itemId,
     ])
 
   return (
     <div className={classes.paper}>
       <Typography component="h1" variant="h5">
-        Send a message to coordinate pickup!
+        Contact the owner to coordinate pickup:
 			</Typography>
       <TextField
         multiline
@@ -64,11 +73,13 @@ const SendMessageContainer = () => {
         margin="normal"
         required
         fullWidth
-        name="details"
-        label="Message:"
-        id="details"
-        value={details}
-        onChange={e => setDetails(e.target.value)}
+        multiline
+        rows={7}
+        name="message"
+        label="Message"
+        id="message"
+        value={description}
+        onChange={e => setDescription(e.target.value)}
       />
       {hasError && <FormHelperText error={hasError}>{errorMessage}</FormHelperText>}
       <Button

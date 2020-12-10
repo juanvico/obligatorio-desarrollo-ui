@@ -1,176 +1,63 @@
-import React, { useCallback, useState } from 'react';
-import { Button, Avatar, TextField, Paper, FormHelperText, Switch, FormControlLabel } from '@material-ui/core';
-import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/LockOutlined';
-import { useMutation } from '@apollo/client';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
-import CREATE_ITEM from '../mutations/item';
-import { useHistory } from 'react-router-dom';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+
+import MESSAGES from '../queries/messages';
+import { useQuery } from '@apollo/client';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: '60vw',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
+  root: {
+    flexGrow: 1,
+    width: '80vw',
+    height: '70vh',
   },
-  avatar: {
-    margin: theme.spacing(2),
-    backgroundColor: theme.palette.primary.main,
+  card: {
+    height: "100%",
+    display: "block",
+    flexDirection: "column"
   },
-  form: {
-    width: '100%',
-    margin: theme.spacing(8),
+  img: {
+    width: '25vw',
+    height: '25vh',
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+
 }));
 
 const MessagesContainer = () => {
   const classes = useStyles();
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [image, setImage] = useState('')
-  const [pickupLatitude, setPickupLatitude] = useState('')
-  const [pickupLongitude, setPickupLongitude] = useState('')
-  const [pickupLocation, setPickupLocation] = useState('')
-  const [availableToPickup, setAvailableToPickup] = useState(true);
-  const [[hasError, errorMessage], setErrors] = useState([false, '']);
-  const history = useHistory()
 
-  const [createItem, { data, error, loading }] = useMutation(CREATE_ITEM, { fetchPolicy: 'no-cache' });
+  const { loading, error, data } = useQuery(MESSAGES, { fetchPolicy: 'network-only' });
+  const history = useHistory();
 
-  if (data?.createItem) {
-    history.push('/')
-  }
-
-  const handleAddition = useCallback(
-    async () => {
-      try {
-        if (title === '') setErrors([true, 'Enter title'])
-        if (description === '') setErrors([true, 'Enter description'])
-        else if (image === '') setErrors([true, 'Enter image URL'])
-        else if (pickupLatitude === '') setErrors([true, 'Enter Pickup Latitude'])
-        else if (pickupLongitude === '') setErrors([true, 'Enter Pickup Longitude'])
-        else if (pickupLocation === '') setErrors([true, 'Enter Pickup Location'])
-        else await createItem({ variables: { description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup } })
-      } catch (error) {
-        console.log(error)
-      }
-    },
-    [title,
-      description,
-      image,
-      pickupLatitude,
-      pickupLongitude,
-      pickupLocation,
-      availableToPickup,
-      createItem,
-    ])
+  if (loading) return 'Loading...';
 
   return (
-    <div className={classes.paper}>
-      <Typography component="h1" variant="h5">
-        Add a new item
-			</Typography>
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="title"
-        label="Title"
-        id="title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="description"
-        label="Description"
-        id="description"
-        value={description}
-        onChange={e => setDescription(e.target.value)}
-      />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="pickup-details"
-        label="Image URL"
-        id="imageUrl"
-        value={image}
-        onChange={e => setImage(e.target.value)}
-      />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="pickup-latitude"
-        label="Pickup Location Latitude"
-        id="pickup-latitude"
-        value={pickupLatitude}
-        onChange={e => setPickupLatitude(e.target.value)}
-      />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="pickup-longitude"
-        label="Pickup Location Longitude"
-        id="pickup-longitude"
-        value={pickupLongitude}
-        onChange={e => setPickupLongitude(e.target.value)}
-      />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="pickup-details"
-        label="Pickup Location Details"
-        id="pickup-details"
-        value={pickupLocation}
-        onChange={e => setPickupLocation(e.target.value)}
-      />
-      <FormControlLabel
-        control={
-          <Switch
-            checked={availableToPickup}
-            onChange={e => setAvailableToPickup(e.target.checked)}
-            name="availableToPickup"
-            color="primary"
-          />
-        }
-        label="Able to pickup"
-      />
-      {hasError && <FormHelperText error={hasError}>{errorMessage}</FormHelperText>}
-      <Button
-        onClick={handleAddition}
-        disabled={loading}
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-      >
-        Add item
-			  </Button>
+    <div className={classes.root}>
+      Mis mensajes:
+      <Grid container spacing={4}>
+      {data?.items?.map((tile) => (
+          <Grid item key={tile} xs={12} sm={6} md ={4}>
+            <Card className={classes.card}>
+              <CardActionArea>
+              <CardContent>
+                {tile.details}
+              </CardContent>
+              </CardActionArea>
+            </Card>
+            </Grid>
+      ))}
+      </Grid>
     </div>
   );
 }
-
 export default MessagesContainer;
