@@ -18,6 +18,7 @@ import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import AddItemContainer from '../AddItemContainer';
+import MessagesContainer from '../MessagesContainer';
 import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
 import ME from '../../queries/me';
 import Feed from '../Feed/Feed';
@@ -144,7 +145,7 @@ const Home = () => {
         </div>
         <Divider />
         <List>
-          {[{ title: 'Home', to: '/' }, { title: 'Add', to: '/add' }].map((nav, index) => (
+          {[{ title: 'Home', to: '/' }, { title: 'Add', to: '/add' }, { title: 'My messages', to: '/messages' }].map((nav, index) => (
             <ListItem button component={Link} key={nav.title} to={nav.to} onClick={handleDrawerClose} >
               <ListItemText primary={nav.title} />
             </ListItem>
@@ -163,6 +164,7 @@ const Home = () => {
         <Switch>
           <Route exact path="/" component={Feed} />
           <Route exact path="/add" component={AddItemContainer} />
+          <Route exact path="/messages" component={MessagesContainer} />
           <Route exact path="/items/:id" component={ItemDetailContainer} />
         </Switch>
       </main>

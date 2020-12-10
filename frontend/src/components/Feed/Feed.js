@@ -52,7 +52,7 @@ const Feed = () => {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  User Details
+                  {tile.title}
                 </Typography>
                 <Typography gutterBottom variant="subtitle2" noWrap >
                   {tile.user_name}

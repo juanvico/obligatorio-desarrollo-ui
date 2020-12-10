@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddItemContainer = () => {
+const MessagesContainer = () => {
   const classes = useStyles();
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -50,12 +50,12 @@ const AddItemContainer = () => {
     async () => {
       try {
         if (title === '') setErrors([true, 'Enter title'])
-        else if (description === '') setErrors([true, 'Enter description'])
+        if (description === '') setErrors([true, 'Enter description'])
         else if (image === '') setErrors([true, 'Enter image URL'])
-        else if (pickupLatitude === '') setErrors([true, 'Enter Pickup Latitude (between -90 and 90) yours is:' + pickupLatitude])
-        else if (pickupLongitude === '' ) setErrors([true, 'Enter Pickup Longitude (between -180 and 180) yours is:' + pickupLongitude])
-        else if (pickupLocation === '') setErrors([true, 'Enter Pickup Details'])
-        else await createItem({ variables: { title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup } })
+        else if (pickupLatitude === '') setErrors([true, 'Enter Pickup Latitude'])
+        else if (pickupLongitude === '') setErrors([true, 'Enter Pickup Longitude'])
+        else if (pickupLocation === '') setErrors([true, 'Enter Pickup Location'])
+        else await createItem({ variables: { description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup } })
       } catch (error) {
         console.log(error)
       }
@@ -105,7 +105,7 @@ const AddItemContainer = () => {
         margin="normal"
         required
         fullWidth
-        name="image_url"
+        name="pickup-details"
         label="Image URL"
         id="imageUrl"
         value={image}
@@ -173,4 +173,4 @@ const AddItemContainer = () => {
   );
 }
 
-export default AddItemContainer;
+export default MessagesContainer;
