@@ -2,6 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import PICKUP_MESSAGES from '../queries/pickupMessages';
 import { useQuery } from '@apollo/client';
@@ -37,13 +41,26 @@ const MessagesContainer = () => {
   return (
     <div className={classes.root}>
       My messages:
-      {/* <Grid container spacing={4}> */}
-      {data?.items?.map((tile) => (
-        <div>
-            From: {tile.user_name} ( {tile.user_email} )
-        </div>
-      ))}
-      {/* </Grid> */}
+      <List>
+       {data?.pickupMessages?.map((myMessage) => (
+         <div>
+          <ListItem key={myMessage.id} alignItems="flex-start">
+          <ListItemText
+            primary={<Typography
+            component="span"
+            variant="body2"
+            className={classes.inline}
+            color="textPrimary"
+          >
+            From: {myMessage.user_name} ({myMessage.user_email})
+          </Typography>}
+            secondary={myMessage.description}
+          />
+          </ListItem>
+          <Divider/>
+          </div>
+          ))}
+      </List> 
     </div>
   );
 }

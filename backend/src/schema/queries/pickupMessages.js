@@ -12,7 +12,8 @@ module.exports = {
   async resolve(_value, _args, context) {
     try {
       await checkAuth(context)
-      const pickupMessages = await PickupMessage.find({});
+      const me = context.loggedUser
+      const pickupMessages = await PickupMessage.find({ destinatary_user_email: me.email});
       return pickupMessages
     }
     catch (ex) {
