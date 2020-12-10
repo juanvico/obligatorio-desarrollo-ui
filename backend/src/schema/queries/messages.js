@@ -5,14 +5,16 @@ const {
   
   const Message = require('../../models/message');
   const MessageType = require('../types/messageType');
-  
+  const UserType = require('../types/userType');
+
   module.exports = {
     type: new GraphQLNonNull(GraphQLList(MessageType)),
     args: {},
     async resolve(_value, _args, context) {
       try {
         await checkAuth(context)
-        const messages = await Message.find({});
+        const me = context.loggedUser.email
+        const messages = await Message.find().all('destinatary_user_email', me);
         return messages
       }
       catch (ex) {

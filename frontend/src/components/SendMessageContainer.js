@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SendMessageContainer = () => {
   const classes = useStyles();
-  const destinataryUserEmail = useState('')
-  const itemId = useState('')
+  const destinataryUserEmail = useState('paolafrancescoli@gmail.com')
+  const itemId = useState('5fd239ca51286b6e27edfb23')
   const [description, setDescription] = useState('')
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const history = useHistory()
