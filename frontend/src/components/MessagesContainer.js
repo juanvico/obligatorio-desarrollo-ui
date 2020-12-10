@@ -37,18 +37,13 @@ const MessagesContainer = () => {
   return (
     <div className={classes.root}>
       My messages:
-      <Grid container spacing={4}>
+      {/* <Grid container spacing={4}> */}
       {data?.items?.map((tile) => (
-          <Grid item key={tile} xs={12} sm={6} md ={4}>
-            <Typography component="h1" variant="h5">
+        <div>
             From: {tile.user_name} ( {tile.user_email} )
-			      </Typography> 
-            <Typography component="subtitle2" variant="subtitle2">
-            Message: {tile.details}
-			      </Typography> 
-            </Grid>
+        </div>
       ))}
-      </Grid>
+      {/* </Grid> */}
     </div>
   );
 }

@@ -21,7 +21,7 @@ const {
     async resolve(value, args, context) {
       try {
         await checkAuth(context)
-        const item = new PickupMessage({ ...args, user_name: context.loggedUser.name, user_email: context.loggedUser.email, })
+        const message = new PickupMessage({ ...args, user_name: context.loggedUser.name, user_email: context.loggedUser.email, })
         await message.save();
         return message;
       } catch (ex) {

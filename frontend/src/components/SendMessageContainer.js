@@ -75,9 +75,9 @@ const SendMessageContainer = () => {
         required
         fullWidth
         rows={7}
-        name="message"
+        name="description"
         label="Message"
-        id="message"
+        id="description"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />

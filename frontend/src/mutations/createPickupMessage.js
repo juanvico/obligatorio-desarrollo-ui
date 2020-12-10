@@ -5,9 +5,9 @@ const CREATE_PICKUP_MESSAGE = gql`
      $destinataryUserEmail: String!,
      $description: String!
      ) {
-      createPickupMessage(
-         destinatary_user_email:$destinataryUserEmail
-         description:$description
+    createPickupMessage(
+        destinatary_user_email:$destinataryUserEmail
+        description:$description
         ) {
       destinatary_user_email
       description
