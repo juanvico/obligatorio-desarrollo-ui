@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SendMessageContainer = () => {
   const classes = useStyles();
+  //TODO: get itemId and destinataryUserEmail, remove hardcoded
   const destinataryUserEmail = 'paolafrancescoli@gmail.com'
   const itemId = '5fd239ca51286b6e27edfb23'
   const [description, setDescription] = useState('')
