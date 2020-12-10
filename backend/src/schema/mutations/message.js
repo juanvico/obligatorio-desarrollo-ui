@@ -15,9 +15,6 @@ const {
         destinatary_user_email: {
             type: new GraphQLNonNull(GraphQLString)
         },
-        item_id: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
         detail: {
             type: new GraphQLNonNull(GraphQLString)
         },
@@ -25,7 +22,7 @@ const {
     async resolve(value, args, context) {
       try {
         await checkAuth(context)
-        const message = new Message({ ...args, remitent_user_name: context.loggedUser.name, remitent_user_email: context.loggedUser.email, })
+        const item = new Message({ ...args, user_name: context.loggedUser.name, user_email: context.loggedUser.email, })
         await message.save();
         return message;
       } catch (ex) {

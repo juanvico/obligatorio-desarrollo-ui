@@ -14,7 +14,7 @@ const {
       try {
         await checkAuth(context)
         const me = context.loggedUser.email
-        const messages = await Message.find().all('destinatary_user_email', me);
+        const messages = await Message.findAll({ destinatary_user_email: me.toLowerCase() });
         return messages
       }
       catch (ex) {

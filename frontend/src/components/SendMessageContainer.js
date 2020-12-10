@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Avatar, TextField, Paper, FormHelperText, Switch, FormControlLabel } from '@material-ui/core';
-import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/LockOutlined';
+import { Button, TextField, FormHelperText} from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 import { useMutation } from '@apollo/client';
 
 // import ITEM from '../queries/item';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
 
 import CREATE_MESSAGE from '../mutations/message';
 import { useHistory } from 'react-router-dom';
@@ -35,7 +34,7 @@ const SendMessageContainer = () => {
   const classes = useStyles();
   //TODO: get itemId and destinataryUserEmail, remove hardcoded
   const destinataryUserEmail = 'paolafrancescoli@gmail.com'
-  const itemId = '5fd239ca51286b6e27edfb23'
+  // const itemId = '5fd239ca51286b6e27edfb23'
   const [description, setDescription] = useState('')
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const history = useHistory()
@@ -53,14 +52,14 @@ const SendMessageContainer = () => {
     async () => {
       try {
         if (description === '') setErrors([true, 'Enter message to send!'])
-        else await createMessage({ variables: { destinataryUserEmail, itemId, description } })
+        else await createMessage({ variables: { destinataryUserEmail, description } })
       } catch (error) {
         console.log(error)
       }
     },
     [destinataryUserEmail,
       description,
-      itemId,
+      createMessage,
     ])
 
   return (
@@ -74,7 +73,6 @@ const SendMessageContainer = () => {
         margin="normal"
         required
         fullWidth
-        multiline
         rows={7}
         name="message"
         label="Message"

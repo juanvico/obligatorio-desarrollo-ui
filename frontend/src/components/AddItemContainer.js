@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Avatar, TextField, Paper, FormHelperText, Switch, FormControlLabel } from '@material-ui/core';
+import { Button, TextField, FormHelperText, Switch, FormControlLabel } from '@material-ui/core';
 import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/LockOutlined';
 import { useMutation } from '@apollo/client';

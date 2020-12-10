@@ -11,7 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 import ITEMS from '../../queries/items';
 import { useQuery } from '@apollo/client';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +37,6 @@ const Feed = () => {
   const classes = useStyles();
 
   const { loading, error, data } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
-  const history = useHistory();
 
   if (loading) return 'Loading...';
 

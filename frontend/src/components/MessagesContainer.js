@@ -1,17 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 
 import MESSAGES from '../queries/messages';
 import { useQuery } from '@apollo/client';
-import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +33,6 @@ const MessagesContainer = () => {
   const classes = useStyles();
 
   const { loading, error, data } = useQuery(MESSAGES, { fetchPolicy: 'network-only' });
-  const history = useHistory();
 
   if (loading) return 'Loading...';
 
