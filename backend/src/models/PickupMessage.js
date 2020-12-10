@@ -18,4 +18,4 @@ const clientSchema = new db.Schema(
   { timestamps: true }
 );
 
-module.exports = db.model("Message", clientSchema);
+module.exports = db.model("PickupMessage", clientSchema);

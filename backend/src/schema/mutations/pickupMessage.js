@@ -2,15 +2,14 @@ const {
     GraphQLString,
     GraphQLNonNull,
     GraphQLList,
-    GraphQLBoolean,
   } = require('graphql');
   
-  const MessageType = require('../types/messageType');
-  const Message = require('../../models/Message');
+  const PickupMessageType = require('../types/pickupMessageType');
+  const PickupMessage = require('../../models/PickupMessage');
   const checkAuth = require('../../middlewares/checkAuth');
   
   module.exports = {
-    type: new GraphQLNonNull(MessageType),
+    type: new GraphQLNonNull(PickupMessageType),
     args: {
         destinatary_user_email: {
             type: new GraphQLNonNull(GraphQLString)
@@ -22,7 +21,7 @@ const {
     async resolve(value, args, context) {
       try {
         await checkAuth(context)
-        const item = new Message({ ...args, user_name: context.loggedUser.name, user_email: context.loggedUser.email, })
+        const message = new PickupMessage({ ...args, user_name: context.loggedUser.name, user_email: context.loggedUser.email, })
         await message.save();
         return message;
       } catch (ex) {

@@ -1,13 +1,16 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, TextField, FormHelperText} from '@material-ui/core';
 import { Typography, makeStyles } from '@material-ui/core';
 import { useMutation } from '@apollo/client';
 
-// import ITEM from '../queries/item';
-// import { useQuery } from '@apollo/client';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 
-import CREATE_MESSAGE from '../mutations/message';
+import CREATE_PICKUP_MESSAGE from '../mutations/createPickupMessage';
 import { useHistory } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,27 +28,27 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     margin: theme.spacing(8),
   },
-  submit: {
+  card: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
 const SendMessageContainer = () => {
   const classes = useStyles();
-  //TODO: get itemId and destinataryUserEmail, remove hardcoded, and make message include itemid
-  const destinataryUserEmail = 'paolafrancescoli@gmail.com'
-  // const itemId = '5fd239ca51286b6e27edfb23'
-  const [description, setDescription] = useState('')
-  const [[hasError, errorMessage], setErrors] = useState([false, '']);
+  const location = useLocation()
   const history = useHistory()
 
-  // const { fetchedLoading, fetchededData } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
+  //TODO: get itemId and make message include itemid + remove hardcoded e-mail + item object is in the location state?
+  var tile = location.state.item
+  var destinataryUserEmail = tile.user_email
+
+  const [description, setDescription] = useState('')
+  const [[hasError, errorMessage], setErrors] = useState([false, '']);
+
   // eslint-disable-next-line 
-  const [createMessage, { data, error, loading }] = useMutation(CREATE_MESSAGE, { fetchPolicy: 'no-cache' });
+  const [createPickupMessage, { data, error, loading }] = useMutation(CREATE_PICKUP_MESSAGE, { fetchPolicy: 'no-cache' });
 
-  // if (fetchedLoading) return 'Loading...';
-
-  if (data?.createMessage) {
+  if (data?.createPickupMessage) {
     history.push('/messages')
   }
 
@@ -53,18 +56,44 @@ const SendMessageContainer = () => {
     async () => {
       try {
         if (description === '') setErrors([true, 'Enter message to send!'])
-        else await createMessage({ variables: { destinataryUserEmail, description } })
+        else await createPickupMessage({ variables: { destinataryUserEmail, description } })
       } catch (error) {
         console.log(error)
       }
     },
     [destinataryUserEmail,
       description,
-      createMessage,
+      createPickupMessage,
     ])
 
   return (
     <div className={classes.paper}>
+      <Card className={classes.card}>
+              <CardActionArea>
+              <CardMedia 
+                component="img"
+                className={classes.img}         
+                image={tile.image}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {tile.title}
+                </Typography>
+                <Typography gutterBottom variant="subtitle2" noWrap >
+                {tile.description}
+                </Typography>                  
+                <Typography  gutterBottom variant="subtitle2" noWrap >
+                  Pick up: {tile.pickup_location_description}
+                </Typography>
+                <Typography variant="body2" >Available: {tile.available_to_pickup ? 'Yes' : 'No'}</Typography>
+                <Typography variant="body2" color="textSecondary" noWrap>
+                  Posted by: {tile.user_name} ({tile.user_email})
+                </Typography>
+              </CardContent>
+              </CardActionArea>
+            </Card>
+
+
       <Typography component="h1" variant="h5">
         Contact {destinataryUserEmail} to coordinate pickup:
 			</Typography>
@@ -75,9 +104,9 @@ const SendMessageContainer = () => {
         required
         fullWidth
         rows={7}
-        name="message"
+        name="description"
         label="Message"
-        id="message"
+        id="description"
         value={description}
         onChange={e => setDescription(e.target.value)}
       />

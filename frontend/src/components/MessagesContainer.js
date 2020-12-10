@@ -2,8 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import MESSAGES from '../queries/messages';
+import PICKUP_MESSAGES from '../queries/pickupMessages';
 import { useQuery } from '@apollo/client';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,25 +34,33 @@ const MessagesContainer = () => {
   const classes = useStyles();
 
   // eslint-disable-next-line 
-  const { loading, error, data } = useQuery(MESSAGES, { fetchPolicy: 'network-only' });
+  const { loading, error, data } = useQuery(PICKUP_MESSAGES, { fetchPolicy: 'network-only' });
 
   if (loading) return 'Loading...';
 
   return (
     <div className={classes.root}>
       My messages:
-      <Grid container spacing={4}>
-      {data?.items?.map((tile) => (
-          <Grid item key={tile} xs={12} sm={6} md ={4}>
-            <Typography component="h1" variant="h5">
-            From: {tile.user_name} ( {tile.user_email} )
-			      </Typography> 
-            <Typography component="subtitle2" variant="subtitle2">
-            Message: {tile.details}
-			      </Typography> 
-            </Grid>
-      ))}
-      </Grid>
+      <List>
+       {data?.pickupMessages?.map((myMessage) => (
+         <div>
+          <ListItem key={myMessage.id} alignItems="flex-start">
+          <ListItemText
+            primary={<Typography
+            component="span"
+            variant="body2"
+            className={classes.inline}
+            color="textPrimary"
+          >
+            From: {myMessage.user_name} ({myMessage.user_email})
+          </Typography>}
+            secondary={myMessage.description}
+          />
+          </ListItem>
+          <Divider/>
+          </div>
+          ))}
+      </List> 
     </div>
   );
 }

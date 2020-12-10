@@ -69,7 +69,12 @@ const Feed = () => {
                 </Typography>
               </CardContent>
                 <CardActions>
-                  <Link to="/sendMessage">Contact for pickup coordination</Link>
+                  <Link to={{
+                        pathname: '/sendMessage',
+                        state: { email: tile.user_email, item: tile }
+                      }}>
+                      Contact for pickup coordination
+                  </Link>
                </CardActions>
               </CardActionArea>
             </Card>
