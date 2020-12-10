@@ -87,6 +87,7 @@ const Home = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
+  // eslint-disable-next-line 
   const { loading, error, data } = useQuery(ME, { fetchPolicy: 'network-only' });
 
   const handleLogout = useCallback(

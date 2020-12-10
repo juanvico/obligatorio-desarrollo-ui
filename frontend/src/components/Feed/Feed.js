@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const Feed = () => {
   const classes = useStyles();
 
+  // eslint-disable-next-line 
   const { loading, error, data } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
 
   if (loading) return 'Loading...';

@@ -11,7 +11,7 @@ const {
       destinatary_user_email: {
         type: new GraphQLNonNull(GraphQLString)
       },
-      detail: {
+      description: {
         type: new GraphQLNonNull(GraphQLString)
       },
       user_name: {
@@ -20,6 +20,6 @@ const {
       user_email: {
         type: new GraphQLNonNull(GraphQLString)
       }
-      
+
     })
   });

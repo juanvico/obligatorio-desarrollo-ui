@@ -4,7 +4,7 @@ const MESSAGES = gql`
   query {
    messages {
       destinatary_user_email
-      detail
+      description
       user_name
       user_email
    }

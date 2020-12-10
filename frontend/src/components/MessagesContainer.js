@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const MessagesContainer = () => {
   const classes = useStyles();
 
+  // eslint-disable-next-line 
   const { loading, error, data } = useQuery(MESSAGES, { fetchPolicy: 'network-only' });
 
   if (loading) return 'Loading...';

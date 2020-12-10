@@ -15,7 +15,7 @@ const {
         destinatary_user_email: {
             type: new GraphQLNonNull(GraphQLString)
         },
-        detail: {
+        description: {
             type: new GraphQLNonNull(GraphQLString)
         },
     },

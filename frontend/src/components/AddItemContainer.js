@@ -38,7 +38,8 @@ const AddItemContainer = () => {
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const history = useHistory()
-
+  
+  // eslint-disable-next-line 
   const [createItem, { data, error, loading }] = useMutation(CREATE_ITEM, { fetchPolicy: 'no-cache' });
 
   if (data?.createItem) {

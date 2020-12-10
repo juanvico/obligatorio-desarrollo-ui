@@ -5,7 +5,7 @@ const clientSchema = new db.Schema(
     destinatary_user_email: {
       type: String
     },
-    detail: {
+    description: {
       type: String,
     },
     user_name: {

@@ -7,10 +7,10 @@ const CREATE_MESSAGE = gql`
      ) {
       createMessage(
          destinatary_user_email:$destinataryUserEmail
-         detail:$description
+         description:$description
         ) {
       destinatary_user_email
-      detail
+      description
       user_name
       user_email
     }

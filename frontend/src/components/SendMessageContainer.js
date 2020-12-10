@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SendMessageContainer = () => {
   const classes = useStyles();
-  //TODO: get itemId and destinataryUserEmail, remove hardcoded
+  //TODO: get itemId and destinataryUserEmail, remove hardcoded, and make message include itemid
   const destinataryUserEmail = 'paolafrancescoli@gmail.com'
   // const itemId = '5fd239ca51286b6e27edfb23'
   const [description, setDescription] = useState('')
@@ -40,6 +40,7 @@ const SendMessageContainer = () => {
   const history = useHistory()
 
   // const { fetchedLoading, fetchededData } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
+  // eslint-disable-next-line 
   const [createMessage, { data, error, loading }] = useMutation(CREATE_MESSAGE, { fetchPolicy: 'no-cache' });
 
   // if (fetchedLoading) return 'Loading...';
@@ -65,7 +66,7 @@ const SendMessageContainer = () => {
   return (
     <div className={classes.paper}>
       <Typography component="h1" variant="h5">
-        Contact the owner to coordinate pickup:
+        Contact {destinataryUserEmail} to coordinate pickup:
 			</Typography>
       <TextField
         multiline
