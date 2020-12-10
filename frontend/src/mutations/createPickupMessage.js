@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 
-const CREATE_MESSAGE = gql`
-   mutation createMessage(
+const CREATE_PICKUP_MESSAGE = gql`
+   mutation createPickupMessage(
      $destinataryUserEmail: String!,
      $description: String!
      ) {
-      createMessage(
+      createPickupMessage(
          destinatary_user_email:$destinataryUserEmail
          description:$description
         ) {
@@ -17,4 +17,4 @@ const CREATE_MESSAGE = gql`
  }
 `;
 
-export default CREATE_MESSAGE;
+export default CREATE_PICKUP_MESSAGE;

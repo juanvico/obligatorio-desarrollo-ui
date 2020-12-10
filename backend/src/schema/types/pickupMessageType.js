@@ -6,7 +6,7 @@ const {
   } = require('graphql');
   
   module.exports = new GraphQLObjectType({
-    name: 'MessageType',
+    name: 'PickupMessageType',
     fields: () => ({
       destinatary_user_email: {
         type: new GraphQLNonNull(GraphQLString)

@@ -9,6 +9,7 @@ const MutationType = new GraphQLObjectType({
     createUser: require('./mutations/user'),
     login: require('./mutations/login'),
     createItem: require('./mutations/item'),
+    createPickupMessage: require('./mutations/pickupMessage'),
   }
 });
 
@@ -18,6 +19,7 @@ const QueryType = new GraphQLObjectType({
     me: require('./queries/me'),
     item: require('./queries/item'),
     items: require('./queries/items'),
+    pickupMessages: require('./queries/pickupMessages'),
   }
 });
 

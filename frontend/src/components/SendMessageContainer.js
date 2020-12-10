@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 // import ITEM from '../queries/item';
 // import { useQuery } from '@apollo/client';
 
-import CREATE_MESSAGE from '../mutations/message';
+import CREATE_PICKUP_MESSAGE from '../mutations/createPickupMessage';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,11 +41,11 @@ const SendMessageContainer = () => {
 
   // const { fetchedLoading, fetchededData } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
   // eslint-disable-next-line 
-  const [createMessage, { data, error, loading }] = useMutation(CREATE_MESSAGE, { fetchPolicy: 'no-cache' });
+  const [createPickupMessage, { data, error, loading }] = useMutation(CREATE_PICKUP_MESSAGE, { fetchPolicy: 'no-cache' });
 
   // if (fetchedLoading) return 'Loading...';
 
-  if (data?.createMessage) {
+  if (data?.createPickupMessage) {
     history.push('/messages')
   }
 
@@ -53,14 +53,14 @@ const SendMessageContainer = () => {
     async () => {
       try {
         if (description === '') setErrors([true, 'Enter message to send!'])
-        else await createMessage({ variables: { destinataryUserEmail, description } })
+        else await createPickupMessage({ variables: { destinataryUserEmail, description } })
       } catch (error) {
         console.log(error)
       }
     },
     [destinataryUserEmail,
       description,
-      createMessage,
+      createPickupMessage,
     ])
 
   return (

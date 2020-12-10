@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
-import MESSAGES from '../queries/messages';
+import PICKUP_MESSAGES from '../queries/pickupMessages';
 import { useQuery } from '@apollo/client';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const MessagesContainer = () => {
   const classes = useStyles();
 
   // eslint-disable-next-line 
-  const { loading, error, data } = useQuery(MESSAGES, { fetchPolicy: 'network-only' });
+  const { loading, error, data } = useQuery(PICKUP_MESSAGES, { fetchPolicy: 'network-only' });
 
   if (loading) return 'Loading...';
 

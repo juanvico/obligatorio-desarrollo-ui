@@ -1,8 +1,6 @@
 const {
   GraphQLString,
   GraphQLNonNull,
-  GraphQLList,
-  GraphQLFloat,
   GraphQLBoolean,
 } = require('graphql');
 
