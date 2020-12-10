@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     margin: theme.spacing(8),
   },
-  submit: {
+  card: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
