@@ -3,13 +3,13 @@ import gql from 'graphql-tag';
 const CREATE_MESSAGE = gql`
    mutation createMessage(
      $destinataryUserEmail: String!,
-     $description: String!,
-     $itemId: String!
+     $itemId: String!,
+     $description: String!
      ) {
       createMessage(
          destinatary_user_email:$destinataryUserEmail
          item_id:$itemId
-         detail:$detail
+         detail:$description
         ) {
       destinatary_user_email
       item_id

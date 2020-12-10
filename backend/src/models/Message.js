@@ -16,7 +16,7 @@ const clientSchema = new db.Schema(
     },
     remitent_user_email: {
       type: String,
-    },
+    }
     
   },
   { timestamps: true }

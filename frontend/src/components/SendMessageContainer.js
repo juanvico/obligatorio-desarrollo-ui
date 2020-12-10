@@ -4,7 +4,7 @@ import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/LockOutlined';
 import { useMutation } from '@apollo/client';
 
-import ITEM from '../queries/item';
+// import ITEM from '../queries/item';
 import { useQuery } from '@apollo/client';
 
 import CREATE_MESSAGE from '../mutations/message';
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 const SendMessageContainer = () => {
   const classes = useStyles();
-  const destinataryUserEmail = useState('paolafrancescoli@gmail.com')
-  const itemId = useState('5fd239ca51286b6e27edfb23')
+  const destinataryUserEmail = 'paolafrancescoli@gmail.com'
+  const itemId = '5fd239ca51286b6e27edfb23'
   const [description, setDescription] = useState('')
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const history = useHistory()
@@ -52,7 +52,7 @@ const SendMessageContainer = () => {
     async () => {
       try {
         if (description === '') setErrors([true, 'Enter message to send!'])
-        else await createMessage({ variables: { destinataryUserEmail, description, itemId } })
+        else await createMessage({ variables: { destinataryUserEmail, itemId, description } })
       } catch (error) {
         console.log(error)
       }

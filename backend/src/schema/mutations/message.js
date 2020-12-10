@@ -15,10 +15,10 @@ const {
         destinatary_user_email: {
             type: new GraphQLNonNull(GraphQLString)
         },
-          item_id: {
+        item_id: {
             type: new GraphQLNonNull(GraphQLString)
         },
-          detail: {
+        detail: {
             type: new GraphQLNonNull(GraphQLString)
         },
     },
