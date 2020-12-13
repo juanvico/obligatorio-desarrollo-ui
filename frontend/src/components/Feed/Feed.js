@@ -42,46 +42,43 @@ const Feed = () => {
   if (loading) return 'Loading...';
 
   return (
-    <div className={classes.root}>
+    <View className={classes.root}>
       <Grid container spacing={4}>
-      {data?.items?.map((tile) => (
-          <Grid item key={tile} xs={12} sm={6} md ={4}>
-            <Card className={classes.card}>
-              <CardActionArea>
-              <CardMedia 
-                component="img"
-                className={classes.img}         
+        {data?.items?.map((tile) => (
+          <Grid item key={tile} xs={12} sm={6} md={4}>
+            <Container>
+              <img component="img"
+                className={classes.img}
                 image={tile.image}
               />
-              <CardContent>
+              <Row>
                 <Typography gutterBottom variant="h5" component="h2">
                   {tile.title}
                 </Typography>
                 <Typography gutterBottom variant="subtitle2" noWrap >
-                {tile.description}
-                </Typography>                  
-                <Typography  gutterBottom variant="subtitle2" noWrap >
+                  {tile.description}
+                </Typography>
+                <Typography gutterBottom variant="subtitle2" noWrap >
                   Pick up: {tile.pickup_location_description}
                 </Typography>
                 <Typography variant="body2" >Available: {tile.available_to_pickup ? 'Yes' : 'No'}</Typography>
                 <Typography variant="body2" color="textSecondary" noWrap>
                   Posted by: {tile.user_name} ({tile.user_email})
                 </Typography>
-              </CardContent>
-                <CardActions>
-                  <Link to={{
-                        pathname: '/sendMessage',
-                        state: { email: tile.user_email, item: tile }
-                      }}>
-                      Contact for pickup coordination
+              </Row>
+              <Row>
+                <Link to={{
+                  pathname: '/sendMessage',
+                  state: { email: tile.user_email, item: tile }
+                }}>
+                  Contact for pickup coordination
                   </Link>
-               </CardActions>
-              </CardActionArea>
-            </Card>
-            </Grid>
-      ))}
+              </Row>
+            </Container>
+          </Grid>
+        ))}
       </Grid>
-    </div>
+    </View>
   );
 }
 export default Feed;

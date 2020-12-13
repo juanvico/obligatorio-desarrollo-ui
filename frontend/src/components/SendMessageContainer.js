@@ -33,10 +33,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SendMessageContainer = () => {
+const SendMessageContainer = ({navigation}) => {
   const classes = useStyles();
   const location = useLocation()
-  const history = useHistory()
 
   //TODO: get itemId and make message include itemid + remove hardcoded e-mail + item object is in the location state?
   var tile = location.state.item
@@ -49,7 +48,7 @@ const SendMessageContainer = () => {
   const [createPickupMessage, { data, error, loading }] = useMutation(CREATE_PICKUP_MESSAGE, { fetchPolicy: 'no-cache' });
 
   if (data?.createPickupMessage) {
-    history.push('/messages')
+    navigation.push('messages')
   }
 
   const handleAddition = useCallback(
@@ -67,7 +66,7 @@ const SendMessageContainer = () => {
     ])
 
   return (
-    <div className={classes.paper}>
+    <Container className={classes.paper}>
       <Card className={classes.card}>
               <CardActionArea>
               <CardMedia 
@@ -108,11 +107,11 @@ const SendMessageContainer = () => {
         label="Message"
         id="description"
         value={description}
-        onChange={e => setDescription(e.target.value)}
+        onChangeText={e => setDescription(e.target.value)}
       />
       {hasError && <FormHelperText error={hasError}>{errorMessage}</FormHelperText>}
       <Button
-        onClick={handleAddition}
+        onPress={handleAddition}
         disabled={loading}
         fullWidth
         variant="contained"
@@ -121,7 +120,7 @@ const SendMessageContainer = () => {
       >
         Send message
 			  </Button>
-    </div>
+    </Container>
   );
 }
 

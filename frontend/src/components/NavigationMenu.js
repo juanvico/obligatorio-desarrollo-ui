@@ -32,7 +32,7 @@ const NavigationMenu = ({ user }) => {
   )
 
   return (
-    <div className={classes.root}>
+    <Container className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -44,7 +44,7 @@ const NavigationMenu = ({ user }) => {
           <Button color="inherit" onClick={handleLogout}>Logout</Button>
         </Toolbar>
       </AppBar>
-    </div>
+    </Container>
   );
 }
 

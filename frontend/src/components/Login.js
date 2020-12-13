@@ -5,7 +5,8 @@ import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useMutation } from '@apollo/client';
 import LOGIN from '../mutations/login';
-
+import { useToken } from "../AuthProvider";
+import { NavigationContainer } from '@react-navigation/native';
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(8, 4),
@@ -26,18 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+
+const Login = ({ navigation }) => {
+  const { setToken } = useToken();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const classes = useStyles();
-  const history = useHistory();
 
   const [[hasError, errorMessage], setHasError] = useState([false, '']);
   const [login, { data, error, loading }] = useMutation(LOGIN, { fetchPolicy: 'no-cache', errorPolicy: 'ignore' });
 
   if (data?.login) {
-    localStorage.setItem('authorization', data.login.token);
-    history.push('/')
+    navigation.push('/')
   }
 
   const handleLogin = useCallback(
@@ -52,13 +53,14 @@ const Login = () => {
     },
     [email, password, login],
   )
+  setToken(token);
   if (loading) {
     return <p className="navbar-text navbar-right">Loading...</p>;
   }
 
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-      <div className={classes.paper}>
+      <Container className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -75,7 +77,7 @@ const Login = () => {
           name="email"
           autoComplete="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChangeText={(e) => setEmail(e.target.value)}
           autoFocus
         />
         <TextField
@@ -88,13 +90,13 @@ const Login = () => {
           type="password"
           value={password}
           id="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChangeText={(e) => setPassword(e.target.value)}
           autoComplete="current-password"
         />
         {hasError && <FormHelperText error={hasError}>{errorMessage}</FormHelperText>}
         {!!error && <FormHelperText error={!!hasError}>Upps try again!</FormHelperText>}
         <Button
-          onClick={handleLogin}
+          onPress={handleLogin}
           fullWidth
           disabled={loading}
           variant="contained"
@@ -110,7 +112,7 @@ const Login = () => {
             </Link>
           </Grid>
         </Grid>
-      </div>
+      </Container>
     </Grid>
   );
 }

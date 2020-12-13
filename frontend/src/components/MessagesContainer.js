@@ -39,7 +39,7 @@ const MessagesContainer = () => {
   if (loading) return 'Loading...';
 
   return (
-    <div className={classes.root}>
+    <DisplayContainer className={classes.root}>
       My messages:
       <List>
        {data?.pickupMessages?.map((myMessage) => (
@@ -61,7 +61,7 @@ const MessagesContainer = () => {
           </div>
           ))}
       </List> 
-    </div>
+    </DisplayContainer>
   );
 }
 export default MessagesContainer;

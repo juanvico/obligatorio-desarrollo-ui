@@ -4,6 +4,7 @@ import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
+import { NavigationContainer } from '@react-navigation/native';
 
 import CREATE_USER from '../mutations/createUser';
 
@@ -28,20 +29,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Register = () => {
+const Register = ({navigation}) => {
 	const classes = useStyles();
 	const [name, setName] = useState('')
 	const [password, setPassword] = useState('')
 	const [rePassword, setRePassword] = useState('')
 	const [email, setEmail] = useState('')
 	const [[hasError, errorMessage], setHasError] = useState([false, ''])
-	const history = useHistory();
+	const { setToken } = useToken();
 
 	const [createUser, { data, loading }] = useMutation(CREATE_USER, { fetchPolicy: 'no-cache' });
 
 	if (data?.createUser) {
-		localStorage.setItem('authorization', data.createUser.token);
-		history.push('/')
+		setToken(data.createUser.token);
+		navigation.push('/')
 	}
 
 	const handleRegistration = async () => {
@@ -58,7 +59,7 @@ const Register = () => {
 
 	return (
 		<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-			<div className={classes.paper}>
+			<Container className={classes.paper}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
 				</Avatar>
@@ -76,7 +77,7 @@ const Register = () => {
 					autoComplete="name"
 					autoFocus
 					value={name}
-					onChange={(e) => setName(e.target.value)}
+					onChangeText={(e) => setName(e.target.value)}
 				/>
 				<TextField
 					variant="outlined"
@@ -88,7 +89,7 @@ const Register = () => {
 					name="email"
 					autoComplete="email"
 					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					onChangeText={(e) => setEmail(e.target.value)}
 				/>
 				<TextField
 					variant="outlined"
@@ -100,7 +101,7 @@ const Register = () => {
 					label="Password"
 					id="password"
 					value={password}
-					onChange={(e) => setPassword(e.target.value)}
+					onChangeText={(e) => setPassword(e.target.value)}
 				/>
 				<TextField
 					variant="outlined"
@@ -112,12 +113,12 @@ const Register = () => {
 					label="Confirm Password"
 					id="confirm-password"
 					value={rePassword}
-					onChange={(e) => setRePassword(e.target.value)}
+					onChangeText={(e) => setRePassword(e.target.value)}
 				/>
 				{hasError && <FormHelperText error={hasError}>{errorMessage}</FormHelperText>}
 				<Button
 					disabled={loading}
-					onClick={handleRegistration}
+					onPress={handleRegistration}
 					fullWidth
 					variant="contained"
 					color="primary"
@@ -132,7 +133,7 @@ const Register = () => {
 						</Link>
 					</Grid>
 				</Grid>
-			</div>
+			</Container>
 		</Grid>
 	);
 }

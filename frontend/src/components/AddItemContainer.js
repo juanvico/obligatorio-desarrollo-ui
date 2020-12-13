@@ -4,7 +4,7 @@ import { Typography, makeStyles } from '@material-ui/core';
 import { useMutation } from '@apollo/client';
 
 import CREATE_ITEM from '../mutations/item';
-import { useHistory } from 'react-router-dom';
+import { NavigationContainer } from '@react-navigation/native';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddItemContainer = () => {
+const AddItemContainer = ({navigation}) => {
   const classes = useStyles();
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -37,13 +37,12 @@ const AddItemContainer = () => {
   const [pickupLocation, setPickupLocation] = useState('')
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
-  const history = useHistory()
   
   // eslint-disable-next-line 
   const [createItem, { data, error, loading }] = useMutation(CREATE_ITEM, { fetchPolicy: 'no-cache' });
 
   if (data?.createItem) {
-    history.push('/')
+    navigation.push('/')
   }
 
   const handleAddition = useCallback(
@@ -71,7 +70,7 @@ const AddItemContainer = () => {
     ])
 
   return (
-    <div className={classes.paper}>
+    <DisplayContainer className={classes.paper}>
       <Typography component="h1" variant="h5">
         Add a new item
 			</Typography>
@@ -85,7 +84,7 @@ const AddItemContainer = () => {
         label="Title"
         id="title"
         value={title}
-        onChange={e => setTitle(e.target.value)}
+        onChangeText={e => setTitle(e.target.value)}
       />
       <TextField
         multiline
@@ -97,7 +96,7 @@ const AddItemContainer = () => {
         label="Description"
         id="description"
         value={description}
-        onChange={e => setDescription(e.target.value)}
+        onChangeText={e => setDescription(e.target.value)}
       />
       <TextField
         multiline
@@ -109,7 +108,7 @@ const AddItemContainer = () => {
         label="Image URL"
         id="imageUrl"
         value={image}
-        onChange={e => setImage(e.target.value)}
+        onChangeText={e => setImage(e.target.value)}
       />
       <TextField
         multiline
@@ -121,7 +120,7 @@ const AddItemContainer = () => {
         label="Pickup Location Latitude"
         id="pickup-latitude"
         value={pickupLatitude}
-        onChange={e => setPickupLatitude(e.target.value)}
+        onChangeText={e => setPickupLatitude(e.target.value)}
       />
       <TextField
         multiline
@@ -133,7 +132,7 @@ const AddItemContainer = () => {
         label="Pickup Location Longitude"
         id="pickup-longitude"
         value={pickupLongitude}
-        onChange={e => setPickupLongitude(e.target.value)}
+        onChangeText={e => setPickupLongitude(e.target.value)}
       />
       <TextField
         multiline
@@ -145,13 +144,13 @@ const AddItemContainer = () => {
         label="Pickup Location Details"
         id="pickup-details"
         value={pickupLocation}
-        onChange={e => setPickupLocation(e.target.value)}
+        onChangeText={e => setPickupLocation(e.target.value)}
       />
       <FormControlLabel
         control={
           <Switch
             checked={availableToPickup}
-            onChange={e => setAvailableToPickup(e.target.checked)}
+            onChangeText={e => setAvailableToPickup(e.target.checked)}
             name="availableToPickup"
             color="primary"
           />
@@ -160,7 +159,7 @@ const AddItemContainer = () => {
       />
       {hasError && <FormHelperText error={hasError}>{errorMessage}</FormHelperText>}
       <Button
-        onClick={handleAddition}
+        onPress={handleAddition}
         disabled={loading}
         fullWidth
         variant="contained"
@@ -169,7 +168,7 @@ const AddItemContainer = () => {
       >
         Add item
 			  </Button>
-    </div>
+    </DisplayContainer>
   );
 }
 

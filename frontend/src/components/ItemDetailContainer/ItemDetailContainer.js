@@ -23,21 +23,21 @@ function ItemDetailContainer() {
 	}
 
 	return (
-	  	<div className="item-detail-container">
+	  	<Container className="item-detail-container">
 			<NavigationMenu/>
-			<div className="add-item-content">
+			<row className="add-item-content">
 
-				<div className="title">
+				<p className="title">
 					{item.name}
-					</div>
+					</p>
 				<Gallery images={item.images}/>
-				<div className="description">
+				<p className="description">
 					<label> {item.description} </label>
-				</div>
+				</p>
 				<PickupDetails user={item.pickUp}/>
 				<UserDetails user={item.owner}/>
-			</div>
-		</div>
+			</row>
+		</Container>
 	);
   }
   
