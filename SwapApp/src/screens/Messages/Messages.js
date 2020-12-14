@@ -34,7 +34,7 @@ function Messages() {
       <ScrollView style={styles.scrollView}>
 
         {messages?.map((aMessage) => (
-        <View key={aMessage.id} style={[styles.messageContainer, { backgroundColor: colors.card }]}>           
+        <View key={aMessage.id} style={[styles.messageContainer, { backgroundColor: colors.primary }]}>           
           <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
           {strings.messages.from} {aMessage.userName} {aMessage.userEmail}
           </Text>

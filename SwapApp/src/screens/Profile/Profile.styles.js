@@ -21,11 +21,13 @@ const styles = StyleSheet.create({
     marginRight: '10%',
     marginTop: 4,
     marginBottom: 8,
+    borderRadius: 12,
   },
   itemContainer: {
     width: '100%',
     margin: 8,
     padding: 16,
+    borderRadius: 12,
   },
 });
 
