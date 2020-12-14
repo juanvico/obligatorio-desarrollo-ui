@@ -27,10 +27,12 @@ function CreateItem() {
 
   const chooseImageFromCamera = () => {
     // TODO: wasn't recognising ImagePicker even though dependency and access keys are there
+    console.log('image from camera needs implementation');
   };
 
   const chooseImageFromGallery = () => {
     // TODO: wasn't recognising ImagePicker even though dependency and access keys are there
+    console.log('image from gallery needs implementation');
   };
 
   
@@ -74,7 +76,7 @@ function CreateItem() {
           title={strings.createItem.cameraButton}
         />
         <Button
-          onPress={chooseImageFromCamera}
+          onPress={chooseImageFromGallery}
           style={styles.secondaryButton}
           title={strings.createItem.galleryButton}
         />

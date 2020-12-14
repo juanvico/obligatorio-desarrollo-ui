@@ -22,6 +22,10 @@ export default {
     logout: 'Logout',
     message: 'This one has a nav with a different color than the home.',
   },
+  items: {
+    sendMessage: 'Contact',
+    owner: 'By:'
+  },
   createMessage: {
     header: 'Send Message',
     body: 'Message',
@@ -48,6 +52,7 @@ export default {
     invalidItem: 'Invalid item',
   },
   messages: {
-    header: 'My messages',
+    header: 'My inbox',
+    from: 'From: '
   },
 };
