@@ -4,4 +4,5 @@ export default {
   profile: 'Profile',
   createItem: 'Add',
   inbox: 'Inbox',
+  myItems: 'My Items',
 };

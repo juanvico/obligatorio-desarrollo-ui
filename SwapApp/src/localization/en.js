@@ -11,8 +11,8 @@ export default {
     explore: 'Explore',
   },
   login: {
-    username: 'Email',
-    usernameHint: 'Enter your email',
+    email: 'Email',
+    emailHint: 'Enter your email',
     button: 'Login',
     password: 'Password',
     passwordHint: 'Enter your password',
@@ -21,7 +21,7 @@ export default {
   profile: {
     header: 'Profile',
     logout: 'Logout',
-    message: 'My items',
+    myItems: 'My items',
   },
   items: {
     sendMessage: 'Contact',

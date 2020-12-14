@@ -1,5 +1,5 @@
 import { useTheme } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, View } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { login, TYPES } from '_actions/UserActions';
@@ -13,7 +13,7 @@ import { ShadowStyles, TextStyles } from '_theme';
 function Login() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const isLoading = useSelector(state =>
@@ -25,9 +25,9 @@ function Login() {
     shallowEqual
   );
 
-  const handleSubmit = () => {
-    dispatch(login(username, password));
-  };
+  const handleSubmit = useCallback(() => {
+    dispatch(login(email, password));
+  }, [dispatch, login, email, password])
 
   return (
     <View style={styles.container}>
@@ -42,11 +42,11 @@ function Login() {
           {strings.login.username}
         </Text>
         <TextField
-          accessibilityHint={strings.login.usernameHint}
-          accessibilityLabel={strings.login.username}
-          onChangeText={setUsername}
-          placeholder={strings.login.username}
-          value={username}
+          accessibilityHint={strings.login.emailHint}
+          accessibilityLabel={strings.login.email}
+          onChangeText={setEmail}
+          placeholder={strings.login.email}
+          value={email}
         />
         <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
           {strings.login.password}
