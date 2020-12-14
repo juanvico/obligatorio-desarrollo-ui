@@ -8,6 +8,7 @@ export default {
   home: {
     header: 'Home',
     message: 'Welcome',
+    explore: 'Explore',
   },
   login: {
     username: 'Email',
@@ -20,7 +21,7 @@ export default {
   profile: {
     header: 'Profile',
     logout: 'Logout',
-    message: 'This one has a nav with a different color than the home.',
+    message: 'My items',
   },
   items: {
     sendMessage: 'Contact',

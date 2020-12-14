@@ -15,24 +15,24 @@ function Home() {
   // TODO: get from backend not hardcoded
   const items = [
     {
-      title: 'Taza', 
-      description: 'una taza muy linda', 
+      title: 'Cup', 
+      description: 'vintage cup', 
       image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
       latitude: -51,
       longitue: 0,
       availableToPickup: true,
-      locationDetails: 'edificio de ladrillos con porton negro',
+      locationDetails: '2nd floor',
       userName: 'Paola',
       userEmail: 'paolafrancescoli@gmail.com'
     },
     {
-      title: 'Taza 2', 
-      description: 'una taza muy linda 2', 
+      title: 'Cup', 
+      description: 'new cup', 
       image: 'https://image.freepik.com/vector-gratis/tazas-asa_1308-41607.jpg',
       latitude: -52,
       longitue: 0,
       availableToPickup: true,
-      locationDetails: 'edificio de ladrillos con porton azul',
+      locationDetails: 'first floor',
       userName: 'Lucia',
       userEmail: 'lucia@mail.com'
     }
@@ -47,6 +47,9 @@ function Home() {
     <View style={styles.container}>
        <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
           {strings.home.message} {user?.username}
+        </Text>
+        <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
+          {strings.home.explore}
         </Text>
 
       <ScrollView style={styles.scrollView}>
