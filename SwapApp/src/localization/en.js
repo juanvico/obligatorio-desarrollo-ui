@@ -25,7 +25,9 @@ export default {
   },
   items: {
     sendMessage: 'Contact',
-    owner: 'By:'
+    owner: 'Posted by:',
+    distance: 'Distance: ',
+    unit: 'meter(s)',
   },
   createMessage: {
     header: 'Send Message',

@@ -23,7 +23,8 @@ function Home() {
       availableToPickup: true,
       locationDetails: '2nd floor',
       userName: 'Paola',
-      userEmail: 'paolafrancescoli@gmail.com'
+      userEmail: 'paolafrancescoli@gmail.com',
+      distance: 1,
     },
     {
       title: 'Cup', 
@@ -34,7 +35,8 @@ function Home() {
       availableToPickup: true,
       locationDetails: 'first floor',
       userName: 'Lucia',
-      userEmail: 'lucia@mail.com'
+      userEmail: 'lucia@mail.com',
+      distance: 2,
     }
   ]
 
@@ -66,6 +68,9 @@ function Home() {
           </Text>
           <Text style={[TextStyles.textField, { color: colors.text }]}>
           {strings.items.owner} {item.userName} {item.userEmail}
+          </Text>
+          <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
+          {strings.items.distance} {item.distance} {strings.items.unit}
           </Text>
           <Button
           onPress={sendMessage}

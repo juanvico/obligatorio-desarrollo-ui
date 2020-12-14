@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
+  secondaryText: {
+    fontSize: 14,
+    fontWeight: 'normal',
+  },
   error: {
     fontSize: 14,
   },
