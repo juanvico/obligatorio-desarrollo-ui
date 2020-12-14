@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
   submitButton: {
     marginTop: 20,
   },
+  secondaryButton: {
+    margin: 5,
+    width: '50%',
+  },
 });
 
 export default styles;

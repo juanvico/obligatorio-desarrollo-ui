@@ -18,6 +18,8 @@ function CreateMessage() {
     dispatch(createMessage(destinatary, body));
   };
 
+  const isLoading = false
+
   return (
     <View style={styles.container}>
       <View
@@ -37,7 +39,7 @@ function CreateMessage() {
           placeholder={strings.createMessage.body}
           value={body}
         />
-        <ErrorView errors={errors} />
+        {/* <ErrorView errors={errors} /> */}
         <Button
           onPress={handleSubmit}
           style={styles.submitButton}

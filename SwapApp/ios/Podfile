@@ -8,6 +8,7 @@ target 'SwapApp' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+
   target 'SwapAppTests' do
     inherit! :complete
     # Pods for testing
