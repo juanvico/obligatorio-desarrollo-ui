@@ -4,17 +4,14 @@
 
 In the project directory, you can run:
 
-### Generic setup
-
-```
-brew install node
-brew install watchman
-```
 
 ### iOS setup
 
 XCode is required with a simulator.
+
 ```
+brew install node
+brew install watchman
 sudo gem install cocoapods
 npx react-native init SwapApp
 ```
@@ -24,6 +21,8 @@ npx react-native init SwapApp
 Android studio is required with a simulator.
 
 ```
+brew install node
+brew install watchman
 brew cask install adoptopenjdk/openjdk/adoptopenjdk8
 ```
 
