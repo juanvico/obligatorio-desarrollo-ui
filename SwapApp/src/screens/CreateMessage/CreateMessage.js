@@ -48,4 +48,4 @@ function CreateMessage() {
   );
 }
 
-export default Login;
+export default CreateMessage;
