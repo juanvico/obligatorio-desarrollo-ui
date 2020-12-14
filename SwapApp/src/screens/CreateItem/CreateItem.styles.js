@@ -5,21 +5,32 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    margin: 16,
+    borderRadius: 12,
   },
-  formContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    borderRadius: 5,
-    padding: 20,
-    width: '100%',
+  itemImage: {
+    alignContent: 'center',
+    width: '65%',
+    height: 200,
+    marginTop: 4,
+    marginBottom: 8,
+    borderRadius: 12,
   },
   submitButton: {
     marginTop: 20,
   },
   secondaryButton: {
-    margin: 5,
-    width: '50%',
+    marginHorizontal: 8,
+    marginVertical: 8,  
+    padding: 12,
+    width: '10%',
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    marginBottom: 12,
   },
 });
 

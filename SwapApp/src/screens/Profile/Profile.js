@@ -15,6 +15,7 @@ function Profile() {
   //TODO: get from server my items
   const myItems = [
     {
+      id: '3',
       title: 'Chair', 
       description: 'a lovely launch chair', 
       image: 'https://image.freepik.com/psd-gratis/sillon-almohada_176382-861.jpg',
@@ -40,7 +41,7 @@ function Profile() {
       </Text>
 
       {myItems?.map((item) => (
-          <View style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+          <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
                 <Image style={styles.itemImage} source={ { uri: item.image}} />
                 <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
                   {item.title}

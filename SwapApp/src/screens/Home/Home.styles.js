@@ -13,10 +13,12 @@ const styles = StyleSheet.create({
     width: '100%',
     margin: 8,
     padding: 16,
+    borderRadius: 12,
   },
   secondaryButton: {
-    margin: 8,
-    width: '100%',
+    marginHorizontal: '10%',
+    marginTop: 16,
+    width: '80%',
   },
   scrollView: {
     width: '100%'
@@ -28,7 +30,11 @@ const styles = StyleSheet.create({
     marginRight: '10%',
     marginTop: 4,
     marginBottom: 8,
+    borderRadius: 12,
   },
+  scrollView: {
+    
+  }
 });
 
 export default styles;
