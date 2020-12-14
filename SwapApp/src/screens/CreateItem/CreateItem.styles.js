@@ -5,21 +5,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    margin: 16,
   },
-  formContainer: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    borderRadius: 5,
-    padding: 20,
-    width: '100%',
+  itemImage: {
+    alignContent: 'center',
+    width: '70%',
+    height: 200,
+    marginTop: 4,
+    marginBottom: 8,
   },
   submitButton: {
     marginTop: 20,
   },
   secondaryButton: {
     margin: 5,
-    width: '50%',
+    width: '10%',
+  },
+  horizontalContainer: {
+    flexDirection: 'row',
+    width: '100%',
   },
 });
 

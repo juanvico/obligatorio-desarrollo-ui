@@ -11,12 +11,14 @@ function Messages() {
   // TODO: get from backend not hardcoded
  const messages = [
   {
+    id: '1',
     description: 'Hi! I am interested in the cup',
     destinatary: 'paolafrancescoli@gmail.com',
     userName: 'Lucia',
     userEmail: 'lucia@mail.com'
   },
   {
+    id: '2',
     description: 'Hi! Love the cup, call me!', 
     destinatary: 'paolafrancescoli@gmail.com',
     userName: 'Jenny',
@@ -32,9 +34,9 @@ function Messages() {
       <ScrollView style={styles.scrollView}>
 
         {messages?.map((aMessage) => (
-        <View style={[styles.messageContainer, { backgroundColor: colors.card }]}>           
+        <View key={aMessage.id} style={[styles.messageContainer, { backgroundColor: colors.card }]}>           
           <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
-          {strings.messages.from} {aMessage.userName}
+          {strings.messages.from} {aMessage.userName} {aMessage.userEmail}
           </Text>
           <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
           {aMessage.userEmail}

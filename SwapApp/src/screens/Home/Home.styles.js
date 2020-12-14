@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     marginTop: 4,
     marginBottom: 8,
   },
+  scrollView: {
+    
+  }
 });
 
 export default styles;

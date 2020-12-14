@@ -15,6 +15,7 @@ function Home() {
   // TODO: get from backend not hardcoded
   const items = [
     {
+      id: '1',
       title: 'Cup', 
       description: 'vintage cup', 
       image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
@@ -27,6 +28,7 @@ function Home() {
       distance: 1,
     },
     {
+      id: '2',
       title: 'Cup', 
       description: 'new cup', 
       image: 'https://image.freepik.com/vector-gratis/tazas-asa_1308-41607.jpg',
@@ -57,7 +59,7 @@ function Home() {
       <ScrollView style={styles.scrollView}>
 
         {items?.map((item) => (
-        <View style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+        <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
           <Image style={styles.itemImage} source={ { uri: item.image}} />
           
           <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
