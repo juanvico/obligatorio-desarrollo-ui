@@ -4,6 +4,12 @@ import { enableScreens } from 'react-native-screens';
 import { Provider } from 'react-redux';
 import RootNavigator from '_navigation';
 import { persistor, store } from '_store';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'localhost:5000/graphql',
+  cache: new InMemoryCache()
+});
 
 enableScreens();
 
@@ -17,9 +23,11 @@ function App() {
   }, []);
 
   return (
-    <Provider store={store}>
-      <RootNavigator />
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <RootNavigator />
+      </Provider>
+    </ApolloProvider>
   );
 }
 

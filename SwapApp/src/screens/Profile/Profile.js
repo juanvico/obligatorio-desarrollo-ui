@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '_actions/UserActions';
 import { Button } from '_components';
@@ -11,6 +11,21 @@ import { TextStyles } from '_theme';
 function Profile() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  
+  //TODO: get from server my items
+  const myItems = [
+    {
+      title: 'Chair', 
+      description: 'a lovely launch chair', 
+      image: 'https://image.freepik.com/psd-gratis/sillon-almohada_176382-861.jpg',
+      latitude: -51,
+      longitue: 0,
+      availableToPickup: true,
+      locationDetails: 'brick building',
+      userName: 'Paola',
+      userEmail: 'paolafrancescoli@gmail.com'
+    }
+  ]
 
   const logoutUser = () => {
     dispatch(logout());
@@ -23,6 +38,22 @@ function Profile() {
       >
         {strings.profile.message}
       </Text>
+
+      {myItems?.map((item) => (
+          <View style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+                <Image style={styles.itemImage} source={ { uri: item.image}} />
+                <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
+                  {item.title}
+                </Text>
+                <Text style={[TextStyles.textField, { color: colors.text }]}>
+                  {item.description}
+                </Text>
+              </View>
+              ))}
+      <ScrollView style={styles.scrollView}>
+
+        </ScrollView>
+
       <Button title={strings.profile.logout} onPress={logoutUser} />
     </View>
   );
