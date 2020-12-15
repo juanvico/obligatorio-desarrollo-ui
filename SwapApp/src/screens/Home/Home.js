@@ -21,10 +21,9 @@ function Home() {
     dispatch(exploreItems())
   }, [exploreItems])
 
-  const sendMessage = () => {
-    navigation.navigate(NAVIGATION.createMessage)
+  const sendMessage = (item) => {
+    navigation.navigate(NAVIGATION.createMessage, { item: item })
   };
-
 
   const renderItem = (data) => {
     return (
@@ -38,7 +37,7 @@ function Home() {
         style={styles.listContainer}
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item, index) => item._id}
+        keyExtractor={item => item._id}
       />
     )
   };
@@ -68,7 +67,7 @@ function Home() {
             {strings.items.locationDescription} {item.pickup_location_description}
             </Text>
             <Button
-            onPress={sendMessage}
+            onPress={sendMessage.bind(this, item)}
             style={styles.secondaryButton}
             title={strings.items.sendMessage}
             />

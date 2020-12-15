@@ -1,4 +1,4 @@
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useRoute } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -12,26 +12,27 @@ import { isLoadingSelector } from '_selectors/StatusSelectors';
 function CreateMessage() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  const route = useRoute();
   const [body, setBody] = useState('');
   const isMultiline = true
   const lines = 4
   const multilineHeight = 80
 
   // TODO: fix this should be something it knows not hardcoded
-    const item =
-    {
-      id: '1',
-      title: 'Cup', 
-      description: 'vintage cup', 
-      image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
-      latitude: -51,
-      longitue: 0,
-      availableToPickup: true,
-      locationDetails: '2nd floor',
-      userName: 'Paola',
-      userEmail: 'paolafrancescoli@gmail.com',
-      distance: 1,
-    };
+    const item = route.params.item;
+    // {
+    //   id: '1',
+    //   title: 'Cup', 
+    //   description: 'vintage cup', 
+    //   image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
+    //   latitude: -51,
+    //   longitue: 0,
+    //   availableToPickup: true,
+    //   locationDetails: '2nd floor',
+    //   userName: 'Paola',
+    //   userEmail: 'paolafrancescoli@gmail.com',
+    //   distance: 1,
+    // };
 
   const handleSubmit = useCallback(() => {
     dispatch(createMessage(item.userEmail, body));
