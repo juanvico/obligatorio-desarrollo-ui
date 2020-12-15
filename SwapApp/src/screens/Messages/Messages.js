@@ -1,5 +1,5 @@
 import { useTheme } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { myMessages } from '_actions/MessageActions';
 import { Text, View, FlatList } from 'react-native';
@@ -10,7 +10,9 @@ import { TextStyles } from '_theme';
 function Messages() {
   const { colors } = useTheme();
   const dispatch = useDispatch()
-  const data = useSelector(state => state.myMessages);
+  var data = useSelector(state => state.message.myMessages);
+
+  console.log(data);
 
   useEffect(() => {
     dispatch(myMessages())
@@ -21,12 +23,12 @@ const renderMessage = ({ item }) => (
 );
 
 const MessageView = ({ item }) => (
-  <View key={item.id} style={[styles.messageContainer, { backgroundColor: colors.primary }]}>           
+  <View style={[styles.messageContainer, { backgroundColor: colors.primary }]}>           
           <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
-          {strings.messages.from} {item.userName} {item.userEmail}
+          {strings.messages.from} {item.user_name}
           </Text>
           <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
-          {item.userEmail}
+          {item.user_email}
           </Text>
           <Text style={[TextStyles.textField, { color: colors.text }]}>
             {item.description}
@@ -39,7 +41,7 @@ const MessageView = ({ item }) => (
     <FlatList
     data={data}
     renderItem={renderMessage}
-    keyExtractor={item => item.id}
+    keyExtractor={item => item._id}
     />
     )
   };
@@ -57,7 +59,7 @@ const MessageView = ({ item }) => (
     <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
       {strings.messages.header}
     </Text>
-      {data ? <MessagesListView/> : <EmptyMessagesView/>}
+      {Object.keys(data).length > 0 ? <MessagesListView/> : <EmptyMessagesView/>}
     </View>
   );
 }

@@ -42,6 +42,7 @@ export default {
     sendMessage: 'Contact',
     owner: 'Posted by:',
     distance: 'Distance: ',
+    locationDescription: 'Location details: ',
     unit: 'meter(s)',
   },
   createMessage: {

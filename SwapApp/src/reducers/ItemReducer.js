@@ -1,11 +1,11 @@
 import { ITEM_TYPES } from '_actions/ItemActions';
 
-const itemReducer = (state = {}, { payload, type }) => {
+const itemReducer = (state =  { exporeItems: [], myItems: [] }, { payload, type }) => {
   switch (type) {
     case ITEM_TYPES.EXPLORE_ITEMS_SUCCESS:
-      return { ...state, ...payload.exploreItems };
-    case ITEM_TYPES.MY_ITEMS:
-      return { ...state, ...payload.myItems };
+      return { ...state, exporeItems: payload.exploreItems };
+    case ITEM_TYPES.MY_ITEMS_SUCCESS:
+      return { ...state, myItems: payload.myItems };
    default:
       return state;
   }

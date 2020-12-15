@@ -12,7 +12,10 @@ import { myItems } from '_actions/ItemActions';
 function MyItems() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
-  const data = useSelector(state => state.myItems);
+  var data = useSelector(state => state.item.myItems);
+
+  console.log('my items:');
+  console.log(data);
 
   useEffect(() => {
     dispatch(myItems())
@@ -27,7 +30,7 @@ function MyItems() {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
       />
     )
   };
@@ -41,7 +44,7 @@ function MyItems() {
   }
 
   const ItemView = ({ item }) => (
-    <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+    <View style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
             <Image style={styles.itemImage} source={ { uri: item.image}} />
             <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
               {item.title}
@@ -50,17 +53,17 @@ function MyItems() {
               {item.description}
             </Text>
             <Text style={[TextStyles.textField, { color: colors.text }]}>
-            {strings.items.owner} {item.userName} {item.userEmail}
+            {strings.items.owner} {item.user_name} {item.user_email}
             </Text>
             <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
-            {strings.items.distance} {item.distance} {strings.items.unit}
+            {strings.items.locationDescription} {item.pickup_location_description}
             </Text>
       </View>
   );
 
   return (
     <View style={styles.container}>
-      { data ? <ItemsListView/> : <EmptyItemsView/>}
+      {Object.keys(data).length > 0 ? <ItemsListView/> : <EmptyItemsView/>}
     </View>
   );
 }

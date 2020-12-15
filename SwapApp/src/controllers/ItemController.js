@@ -1,6 +1,7 @@
 import apolloClient from '../client/apollo-client';
 import CREATE_ITEM from '_apollo/mutations/item';
 import ITEMS from '_apollo/queries/items';
+import MY_ITEMS from '_apollo/queries/myItems';
 
 class ItemController {
   static createItem = async ({ title, description, image , pickupLatitude, pickupLongitude, pickupLocation, availableToPickup}) => {
@@ -23,7 +24,7 @@ class ItemController {
     const { data } = await apolloClient.query({
       query: MY_ITEMS
     })
-    return data.items
+    return data.myItems
   }
 }
 

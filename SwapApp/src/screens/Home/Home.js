@@ -14,8 +14,10 @@ function Home() {
   const { colors } = useTheme();
   const user = useSelector(getUser);
   const navigation = useNavigation();
-  const data = useSelector(state => state.exploreItems);
   const dispatch = useDispatch();
+  var data = useSelector(state => state.item.exploreItems);
+
+  console.log(data);
 
   useEffect(() => {
     dispatch(exploreItems())
@@ -30,9 +32,8 @@ function Home() {
     <ItemView item={item} />
   );
 
-
   const ItemView = ({ item }) => (
-    <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+    <View style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
             <Image style={styles.itemImage} source={ { uri: item.image}} />
             <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
               {item.title}
@@ -41,10 +42,10 @@ function Home() {
               {item.description}
             </Text>
             <Text style={[TextStyles.textField, { color: colors.text }]}>
-            {strings.items.owner} {item.userName} {item.userEmail}
+            {strings.items.owner} {item.user_name} {item.user_email}
             </Text>
             <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
-            {strings.items.distance} {item.distance} {strings.items.unit}
+            {strings.items.locationDescription} {strings.items.pickup_location_description}
             </Text>
             <Button
             onPress={sendMessage}
@@ -54,12 +55,12 @@ function Home() {
       </View>
   );
 
-  function ItemsListView() {
+  function ItemListView() {
     return (
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
+    <FlatList
+      data={data}
+      renderItem={renderItem}
+      keyExtractor={ item => item._id }
       />
     )
   };
@@ -70,7 +71,7 @@ function Home() {
         {strings.home.empty}
       </Text>
     )
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -80,9 +81,13 @@ function Home() {
         <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
           {strings.home.explore}
         </Text>
+        {/* 
+        
+        Commenting this as itemListview, for some reason FlatList item is null, even though data is a valid array (works in messages)
 
-      { data ? <ItemsListView/> : <EmptyItemsView/>}
-      
+        {Object.keys(data).length > 0 ? <ItemListView/> : <EmptyItemsView/>}      
+        
+        */}
     </View>
   );
 }
