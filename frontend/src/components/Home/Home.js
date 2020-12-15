@@ -23,7 +23,7 @@ import SendMessageContainer from '../SendMessageContainer';
 import ItemDetailContainer from '../ItemDetailContainer/ItemDetailContainer';
 import ME from '../../queries/me';
 import Feed from '../Feed/Feed';
-
+import MyItems from '../MyItems';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -147,7 +147,7 @@ const Home = () => {
         </div>
         <Divider />
         <List>
-          {[{ title: 'Home', to: '/' }, { title: 'Add', to: '/add' }, { title: 'My messages', to: '/messages' }].map((nav, index) => (
+          {[{ title: 'Home', to: '/' }, { title: 'Add Item', to: '/add' }, { title: 'My items', to: '/items' }, { title: 'My messages', to: '/messages' }].map((nav, index) => (
             <ListItem button component={Link} key={nav.title} to={nav.to} onClick={handleDrawerClose} >
               <ListItemText primary={nav.title} />
             </ListItem>
@@ -168,6 +168,7 @@ const Home = () => {
           <Route exact path="/add" component={AddItemContainer} />
           <Route exact path="/sendMessage" component={SendMessageContainer} />
           <Route exact path="/messages" component={MessagesContainer} />
+          <Route exact path="/items" component={MyItems} />
           <Route exact path="/items/:id" component={ItemDetailContainer} />
         </Switch>
       </main>

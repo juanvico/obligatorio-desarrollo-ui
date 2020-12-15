@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 
-import ITEMS from '../../queries/items';
+import PICKUP_ITEMS from '../../queries/pickupItems';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
@@ -35,53 +35,61 @@ const useStyles = makeStyles((theme) => ({
 
 const Feed = () => {
   const classes = useStyles();
-
+  const [lat, setLat] = useState('')
+  const [lng, setLng] = useState('')
+ 
   // eslint-disable-next-line 
-  const { loading, error, data } = useQuery(ITEMS, { fetchPolicy: 'network-only' });
-
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setLat(position.coords.latitude);
+      setLng(position.coords.longitude);
+    });
+  }
+  const { loading, error, data } = useQuery(PICKUP_ITEMS, {
+    variables: { lat: parseFloat(lat), lng: parseFloat(lng) } });
   if (loading) return 'Loading...';
-
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
-      {data?.items?.map((tile) => (
-          <Grid item key={tile} xs={12} sm={6} md ={4}>
+        {data?.items?.map((tile) => (
+          <Grid item key={tile} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardActionArea>
-              <CardMedia 
-                component="img"
-                className={classes.img}         
-                image={tile.image}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {tile.title}
+                <CardMedia
+                  component="img"
+                  className={classes.img}
+                  image={tile.image}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {tile.title}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2" noWrap >
+                    {tile.description}
+                  </Typography>
+                  <Typography gutterBottom variant="subtitle2" noWrap >
+                    Pick up: {tile.pickup_location_description}
+                  </Typography>
+                  <Typography variant="body2" >Available: {tile.available_to_pickup ? 'Yes' : 'No'}</Typography>
+                  <Typography variant="body2" color="textSecondary" noWrap>
+                    Posted by: {tile.user_name} ({tile.user_email})
                 </Typography>
-                <Typography gutterBottom variant="subtitle2" noWrap >
-                {tile.description}
-                </Typography>                  
-                <Typography  gutterBottom variant="subtitle2" noWrap >
-                  Pick up: {tile.pickup_location_description}
-                </Typography>
-                <Typography variant="body2" >Available: {tile.available_to_pickup ? 'Yes' : 'No'}</Typography>
-                <Typography variant="body2" color="textSecondary" noWrap>
-                  Posted by: {tile.user_name} ({tile.user_email})
-                </Typography>
-              </CardContent>
+                </CardContent>
                 <CardActions>
                   <Link to={{
-                        pathname: '/sendMessage',
-                        state: { email: tile.user_email, item: tile }
-                      }}>
-                      Contact for pickup coordination
+                    pathname: '/sendMessage',
+                    state: { email: tile.user_email, item: tile }
+                  }}>
+                    Contact for pickup coordination
                   </Link>
-               </CardActions>
+                </CardActions>
               </CardActionArea>
             </Card>
-            </Grid>
-      ))}
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
 }
+
 export default Feed;

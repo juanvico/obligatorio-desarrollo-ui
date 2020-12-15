@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-const ITEMS = gql`
+const MYITEMS = gql`
   query {
-   items {
+    myItems {
       _id
       title
       description
@@ -17,4 +17,4 @@ const ITEMS = gql`
  }
 `;
 
-export default ITEMS;
+export default MYITEMS;

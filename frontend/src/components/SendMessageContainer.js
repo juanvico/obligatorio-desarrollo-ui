@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, TextField, FormHelperText} from '@material-ui/core';
 import { Typography, makeStyles } from '@material-ui/core';
 import { useMutation } from '@apollo/client';
@@ -92,8 +92,6 @@ const SendMessageContainer = () => {
               </CardContent>
               </CardActionArea>
             </Card>
-
-
       <Typography component="h1" variant="h5">
         Contact {destinataryUserEmail} to coordinate pickup:
 			</Typography>
