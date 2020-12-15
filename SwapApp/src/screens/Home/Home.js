@@ -1,6 +1,6 @@
 import { useTheme, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
-import { Text, View, ScrollView, Image } from 'react-native';
+import { Text, View, ScrollView, Image, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import strings from '_localization';
 import styles from '_screens/Home/Home.styles';
@@ -15,7 +15,7 @@ function Home() {
   const navigation = useNavigation();
 
   // TODO: get from backend not hardcoded
-  const items = [
+  const data = [
     {
       id: '1',
       title: 'Cup', 
@@ -44,9 +44,39 @@ function Home() {
     }
   ]
 
+
   const sendMessage = () => {
     navigation.navigate(NAVIGATION.createMessage)
   };
+
+  const renderItem = ({ item }) => (
+    <ItemView item={item} />
+  );
+
+
+  const ItemView = ({ item }) => (
+    <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+            <Image style={styles.itemImage} source={ { uri: item.image}} />
+            <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
+              {item.title}
+            </Text>
+            <Text style={[TextStyles.textField, { color: colors.text }]}>
+              {item.description}
+            </Text>
+            <Text style={[TextStyles.textField, { color: colors.text }]}>
+            {strings.items.owner} {item.userName} {item.userEmail}
+            </Text>
+            <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
+            {strings.items.distance} {item.distance} {strings.items.unit}
+            </Text>
+            <Button
+            onPress={sendMessage}
+            style={styles.secondaryButton}
+            title={strings.items.sendMessage}
+            />
+      </View>
+  );
+
 
   return (
     <View style={styles.container}>
@@ -57,34 +87,12 @@ function Home() {
           {strings.home.explore}
         </Text>
 
-      <ScrollView style={styles.scrollView}>
-
-        {items?.map((item) => (
-        <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
-          <Image style={styles.itemImage} source={ { uri: item.image}} />
-          
-          <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
-            {item.title}
-          </Text>
-          <Text style={[TextStyles.textField, { color: colors.text }]}>
-            {item.description}
-          </Text>
-          <Text style={[TextStyles.textField, { color: colors.text }]}>
-          {strings.items.owner} {item.userName} {item.userEmail}
-          </Text>
-          <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
-          {strings.items.distance} {item.distance} {strings.items.unit}
-          </Text>
-          <Button
-          onPress={sendMessage}
-          style={styles.secondaryButton}
-          title={strings.items.sendMessage}
-          />
-        </View>
-        ))}
-
-      </ScrollView>
-
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+      
     </View>
   );
 }

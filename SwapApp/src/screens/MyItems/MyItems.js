@@ -1,6 +1,6 @@
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
-import { Text, View, ScrollView, Image } from 'react-native';
+import { Text, View, FlatList, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { logout } from '_actions/UserActions';
 import { Button } from '_components';
@@ -13,7 +13,7 @@ function MyItems() {
   const dispatch = useDispatch();
 
   //TODO: get from server my items
-  const myItems = [
+  const data = [
     {
       id: '3',
       title: 'Chair',
@@ -28,33 +28,35 @@ function MyItems() {
     }
   ]
 
-  const logoutUser = () => {
-    dispatch(logout());
-  };
+  const renderItem = ({ item }) => (
+    <ItemView item={item} />
+  );
 
-  return (
-    <View style={styles.container}>
-      {/* <Text
-        style={[TextStyles.fieldTitle, styles.legend, { color: colors.text }]}
-      >
-        {strings.profile.message}
-      </Text> */}
-
-      <ScrollView style={styles.scrollView}>
-        {myItems?.map((item) => (
-          <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}>
-            <Image style={styles.itemImage} source={{ uri: item.image }} />
+  const ItemView = ({ item }) => (
+    <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+            <Image style={styles.itemImage} source={ { uri: item.image}} />
             <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
               {item.title}
             </Text>
             <Text style={[TextStyles.textField, { color: colors.text }]}>
               {item.description}
             </Text>
-          </View>
-        ))}
-      </ScrollView>
+            <Text style={[TextStyles.textField, { color: colors.text }]}>
+            {strings.items.owner} {item.userName} {item.userEmail}
+            </Text>
+            <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
+            {strings.items.distance} {item.distance} {strings.items.unit}
+            </Text>
+      </View>
+  );
 
-      <Button title={strings.profile.logout} onPress={logoutUser} />
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
     </View>
   );
 }

@@ -30,17 +30,7 @@ function Profile() {
         {strings.profile.message}
       </Text>
 
-      <TouchableOpacity onPress={handleGoMyItems}>
-        <Text
-          style={[TextStyles.fieldTitle, styles.legend, { color: colors.text }]}
-        >
-          {strings.profile.myItems}
-        </Text>
-
-      </TouchableOpacity>
-
-
-
+      <Button title={strings.profile.myItems} onPress={handleGoMyItems} />
       <Button title={strings.profile.logout} onPress={logoutUser} />
     </View>
   );
