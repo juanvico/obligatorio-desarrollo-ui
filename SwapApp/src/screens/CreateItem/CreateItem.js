@@ -22,8 +22,8 @@ function CreateItem() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [itemImage, setItemImage] = useState({sourceURL: 'https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg'})
-  const [pickupLatitude, setPickupLatitude] = useState(0)
-  const [pickupLongitude, setPickupLongitude] = useState(0)
+  const [pickupLatitude, setPickupLatitude] = useState('0')
+  const [pickupLongitude, setPickupLongitude] = useState('0')
   const [pickupLocation, setPickupLocation] = useState('')
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);

@@ -35,7 +35,7 @@ export default {
   profile: {
     header: 'Profile',
     logout: 'Logout',
-    myItems: 'My items',
+    myItems: 'View My items',
   },
   items: {
     sendMessage: 'Contact',
