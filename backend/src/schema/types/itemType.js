@@ -5,6 +5,7 @@ const {
   GraphQLList,
   GraphQLFloat,
   GraphQLBoolean,
+  graphql,
 } = require('graphql');
 
 module.exports = new GraphQLObjectType({
@@ -23,10 +24,10 @@ module.exports = new GraphQLObjectType({
       type: GraphQLNonNull(GraphQLString)
     },
     pickup_location_latitude: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLFloat)
     },
     pickup_location_longitude: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: new GraphQLNonNull(GraphQLFloat)
     },
     pickup_location_description: {
       type: new GraphQLNonNull(GraphQLString)

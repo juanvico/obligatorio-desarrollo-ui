@@ -20,6 +20,7 @@ const QueryType = new GraphQLObjectType({
     item: require('./queries/item'),
     items: require('./queries/items'),
     pickupMessages: require('./queries/pickupMessages'),
+    myItems: require('./queries/myItems')
   }
 });
 

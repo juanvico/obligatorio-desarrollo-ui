@@ -12,10 +12,10 @@ const clientSchema = new db.Schema(
       type: String
     },
     pickup_location_latitude: {
-      type: String
+      type: Number
     },
     pickup_location_longitude: {
-      type: String
+      type: Number
     },
     pickup_location_description: {
       type: String
