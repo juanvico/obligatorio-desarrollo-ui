@@ -22,8 +22,6 @@ function CreateItem() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [itemImage, setItemImage] = useState({sourceURL: 'https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg'})
-  const [pickupLatitude, setPickupLatitude] = useState('0')
-  const [pickupLongitude, setPickupLongitude] = useState('0')
   const [pickupLocation, setPickupLocation] = useState('')
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
@@ -32,8 +30,8 @@ function CreateItem() {
   const multilineHeight = 60
   
   const handleSubmit = useCallback(() => {
-    dispatch(createItem(title, description, itemImage.sourceURL, parseFloat(pickupLatitude), parseFloat(pickupLongitude), pickupLocation, availableToPickup));
-  }, [dispatch, createItem, title, description, itemImage.sourceURL, parseFloat(pickupLatitude), parseFloat(pickupLongitude), pickupLocation, availableToPickup])
+    dispatch(createItem(title, description, itemImage.sourceURL, pickupLocation, availableToPickup));
+  }, [dispatch, createItem, title, description, itemImage.sourceURL, pickupLocation, availableToPickup])
 
   const chooseImageFromCamera = () => {
     ImagePicker.openCamera({
@@ -98,27 +96,6 @@ function CreateItem() {
           placeholder={strings.createItem.descriptionHint}
           value={description}
           style={styles.multilineText}
-        />
-       
-        <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
-          {strings.createItem.latitude}
-        </Text>
-        <TextField
-          accessibilityHint={strings.createItem.latitudeHint}
-          accessibilityLabel={strings.createItem.latitude}
-          onChangeText={setPickupLatitude}
-          placeholder={strings.createItem.latitudeHint}
-          value={pickupLatitude}
-        />
-        <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
-          {strings.createItem.longitude}
-        </Text>
-        <TextField
-          accessibilityHint={strings.createItem.longitudeHing}
-          accessibilityLabel={strings.createItem.longitude}
-          onChangeText={setPickupLongitude}
-          placeholder={strings.createItem.longitudeHint}
-          value={pickupLongitude}
         />
         <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
           {strings.createItem.locationDetails}

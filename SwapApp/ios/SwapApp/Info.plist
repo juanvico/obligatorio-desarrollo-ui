@@ -44,7 +44,10 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>$(PRODUCT_NAME) would like to use your location (For upload your item location)</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to use your location (For upload your item location)</string>
+
 	<key>UILaunchStoryboardName</key>
 	<string>BootSplash</string>
 	<key>NSAppTransportSecurity</key>
