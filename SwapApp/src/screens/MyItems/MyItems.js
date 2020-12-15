@@ -49,9 +49,6 @@ function MyItems() {
             <Text style={[TextStyles.textField, { color: colors.text }]}>
               {item.description}
             </Text>
-            <Text style={[TextStyles.textField, { color: colors.text }]}>
-            {strings.items.owner} {item.user_name} {item.user_email}
-            </Text>
             <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
             {strings.items.locationDescription} {item.pickup_location_description}
             </Text>

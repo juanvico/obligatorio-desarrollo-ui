@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 16,
   },
+  listContainer: {
+    width: '100%',
+  },
   itemContainer: {
     width: '100%',
     margin: 8,
