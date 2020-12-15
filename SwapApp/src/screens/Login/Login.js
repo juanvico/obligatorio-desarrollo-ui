@@ -1,18 +1,21 @@
-import { useTheme } from '@react-navigation/native';
+import { useTheme, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { login, TYPES } from '_actions/UserActions';
 import { Button, ErrorView, TextField } from '_components';
+import navigation from '_constants/navigation';
 import strings from '_localization';
 import styles from '_screens/Login/Login.styles';
 import errorsSelector from '_selectors/ErrorSelectors';
 import { isLoadingSelector } from '_selectors/StatusSelectors';
 import { ShadowStyles, TextStyles } from '_theme';
+import { NAVIGATION } from '_constants';
 
 function Login() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,6 +32,10 @@ function Login() {
     dispatch(login(email, password));
   }, [dispatch, login, email, password])
 
+  const handleRegister = () => {
+    navigation.navigate(NAVIGATION.register)
+  }
+
   return (
     <View style={styles.container}>
       <View
@@ -39,7 +46,7 @@ function Login() {
         ]}
       >
         <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
-          {strings.login.username}
+          {strings.login.email}
         </Text>
         <TextField
           accessibilityHint={strings.login.emailHint}
@@ -65,6 +72,11 @@ function Login() {
           style={styles.submitButton}
           title={isLoading ? strings.actions.loading : strings.login.button}
         />
+        <TouchableOpacity onPress={handleRegister} style={styles.secondaryButton}>
+          <Text style={[TextStyles.selectableText, { color: colors.text }]}>
+              {strings.login.register}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
