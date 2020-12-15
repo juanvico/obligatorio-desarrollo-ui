@@ -21,25 +21,27 @@ function CreateItem() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [itemImage, setItemImage] = useState({sourceURL: 'https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg'})
+  const [itemImage, setItemImage] = useState('https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg')
   const [pickupLocation, setPickupLocation] = useState('')
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const isMultiline = true
   const lines = 3
   const multilineHeight = 60
-  
+
   const handleSubmit = useCallback(() => {
-    dispatch(createItem(title, description, itemImage.sourceURL, pickupLocation, availableToPickup));
-  }, [dispatch, createItem, title, description, itemImage.sourceURL, pickupLocation, availableToPickup])
+    dispatch(createItem(title, description, itemImage, pickupLocation, availableToPickup));
+  }, [dispatch, createItem, title, description, itemImage, pickupLocation, availableToPickup])
 
   const chooseImageFromCamera = () => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
       cropping: true,
+      includeBase64: true,
     }).then(image => {
-      setItemImage(image)
+      const base64 = 'data:' + image.mime + ';base64,' + image.data;
+      setItemImage(base64)
     });
   };
 
@@ -47,9 +49,11 @@ function CreateItem() {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true
+      cropping: true,
+      includeBase64: true,
     }).then(image => {
-      setItemImage(image)
+      const base64 = 'data:' + image.mime + ';base64,' + image.data;
+      setItemImage(base64)
     });
   };
 
@@ -62,7 +66,7 @@ function CreateItem() {
       <ScrollView>
 
         <View style={styles.horizontalContainer}>
-          <Image style={styles.itemImage} source={ { uri: itemImage.sourceURL}} />
+          <Image style={styles.itemImage} source={ { uri: itemImage}} />
           <View>
             <TouchableOpacity onPress={chooseImageFromCamera} style={styles.secondaryButton}>
               <Image source={cameraIcon}/>
