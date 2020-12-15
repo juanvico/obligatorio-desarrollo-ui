@@ -1,16 +1,18 @@
 import { useTheme } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Button, ErrorView, TextField } from '_components';
 import styles from '_screens/CreateItem/CreateItem.styles';
 import { ShadowStyles, TextStyles } from '_theme';
 import strings from '_localization';
-import { createItem, TYPES } from '_actions/ItemActions';
+import { createItem, ITEM_TYPES } from '_actions/ItemActions';
 import ImagePicker from 'react-native-image-crop-picker';
 import { ScrollView } from 'react-native-gesture-handler';
 import cameraIcon from '_assets/ic_camera/ic_camera.png';
 import galleryIcon from '_assets/ic_gallery/ic_gallery.png';
+import errorsSelector from '_selectors/ErrorSelectors';
+import { isLoadingSelector } from '_selectors/StatusSelectors';
 
 
 
@@ -20,8 +22,8 @@ function CreateItem() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [itemImage, setItemImage] = useState({sourceURL: 'https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg'})
-  const [pickupLatitude, setPickupLatitude] = useState('')
-  const [pickupLongitude, setPickupLongitude] = useState('')
+  const [pickupLatitude, setPickupLatitude] = useState(0)
+  const [pickupLongitude, setPickupLongitude] = useState(0)
   const [pickupLocation, setPickupLocation] = useState('')
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
@@ -29,9 +31,9 @@ function CreateItem() {
   const lines = 3
   const multilineHeight = 60
   
-  const handleSubmit = () => {
-    dispatch(createItem(title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup));
-  };
+  const handleSubmit = useCallback(() => {
+    dispatch(createItem(title, description, itemImage.sourceURL, parseFloat(pickupLatitude), parseFloat(pickupLongitude), pickupLocation, availableToPickup));
+  }, [dispatch, createItem, title, description, itemImage.sourceURL, parseFloat(pickupLatitude), parseFloat(pickupLongitude), pickupLocation, availableToPickup])
 
   const chooseImageFromCamera = () => {
     ImagePicker.openCamera({
@@ -40,7 +42,6 @@ function CreateItem() {
       cropping: true,
     }).then(image => {
       setItemImage(image)
-      console.log(image);
     });
   };
 
@@ -51,12 +52,12 @@ function CreateItem() {
       cropping: true
     }).then(image => {
       setItemImage(image)
-      console.log(image);
     });
   };
 
-  
-  const isLoading = false
+  const isLoading = useSelector(state =>
+    isLoadingSelector([ITEM_TYPES.CREATE_ITEM], state)
+  );
 
   return (
     <View style={[styles.container, {backgroundColor: colors.primary}]}>

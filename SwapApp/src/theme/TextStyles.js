@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     marginVertical: 2,
   },
+  selectableText: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    marginVertical: 4,
+  },
   fieldTitle: {
     fontSize: 16,
     fontWeight: '700',

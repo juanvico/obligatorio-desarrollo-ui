@@ -1,30 +1,31 @@
 import { ItemController } from '_controllers';
 
-export const TYPES = {
+export const ITEM_TYPES = {
   CREATE_ITEM: 'CREATE_ITEM',
+  CREATE_ITEM_REQUEST: 'CREATE_ITEM_REQUEST',
   CREATE_ITEM_ERROR: 'CREATE_ITEM_ERROR',
   CREATE_ITEM_SUCCESS: 'CREATE_ITEM_SUCCESS',
 };
 
 const createItemRequest = () => ({
-  type: TYPES.CREATE_ITEM,
+  type: ITEM_TYPES.CREATE_ITEM_REQUEST,
   payload: null,
 });
 
 const createItemError = error => ({
-    type: TYPES.CREATE_ITEM_ERROR,
+    type: ITEM_TYPES.CREATE_ITEM_ERROR,
     payload: { error },
 });
   
 const createItemSuccess = item => ({
-type: TYPES.CREATE_ITEM_SUCCESS,
+type: ITEM_TYPES.CREATE_ITEM_SUCCESS,
 payload: { item },
 });
 
-export const createItem = (title, description, image, latitude, longitude, locationDetails) => async dispatch => {
-  dispatch(createMessageRequest());
+export const createItem = (title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup) => async dispatch => {
+  dispatch(createItemRequest());
   try {
-    const item = await ItemController.createItem(title, description, image, latitude, longitude, locationDetails);
+    const item = await ItemController.createItem({title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup});
     dispatch(createItemSuccess(item));
   } catch (error) {
     dispatch(createItemError(error.message));

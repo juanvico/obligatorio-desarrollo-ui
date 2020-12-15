@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     marginTop: 20,
-  },  
+  }, 
   secondaryButton: {
     margin: 8,
     padding: 12,

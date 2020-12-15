@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NAVIGATION } from '_constants';
-import { Login } from '_screens';
+import { Login, Register } from '_screens';
 import { getUser } from '_selectors/UserSelectors';
 
 const Stack = createStackNavigator();
@@ -18,6 +18,13 @@ function AuthNavigator() {
         options={{
           headerShown: false,
           animationTypeForReplace: user ? 'push' : 'pop',
+        }}
+      />
+       <Stack.Screen
+        component={Register}
+        name={NAVIGATION.register}
+        options={{
+          headerShown: false
         }}
       />
     </Stack.Navigator>
