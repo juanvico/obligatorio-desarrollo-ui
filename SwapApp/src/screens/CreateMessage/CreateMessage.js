@@ -18,25 +18,11 @@ function CreateMessage() {
   const lines = 4
   const multilineHeight = 80
 
-  // TODO: fix this should be something it knows not hardcoded
-    const item = route.params.item;
-    // {
-    //   id: '1',
-    //   title: 'Cup', 
-    //   description: 'vintage cup', 
-    //   image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
-    //   latitude: -51,
-    //   longitue: 0,
-    //   availableToPickup: true,
-    //   locationDetails: '2nd floor',
-    //   userName: 'Paola',
-    //   userEmail: 'paolafrancescoli@gmail.com',
-    //   distance: 1,
-    // };
+  const item = route.params.item;
 
   const handleSubmit = useCallback(() => {
-    dispatch(createMessage(item.userEmail, body));
-  }, [dispatch, createMessage, item.userEmail, body])
+    dispatch(createMessage(item.user_email, body));
+  }, [dispatch, createMessage, item.user_email, body])
 
 
   const isLoading = useSelector(state =>
@@ -56,7 +42,7 @@ function CreateMessage() {
             {item.description}
           </Text>
           <Text style={[TextStyles.textField, { color: colors.text }]}>
-          {strings.items.owner} {item.userName} {item.userEmail}
+          {strings.items.owner} {item.user_name}
           </Text>
           <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
           {strings.items.distance} {item.distance} {strings.items.unit}
