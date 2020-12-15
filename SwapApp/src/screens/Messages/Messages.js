@@ -31,19 +31,33 @@ const MessageView = ({ item }) => (
           <Text style={[TextStyles.textField, { color: colors.text }]}>
             {item.description}
           </Text>
-        </View>
+  </View>
 );
 
-  return (
-    <View style={styles.container}>
-       <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
-          {strings.messages.header}
-        </Text>
-        <FlatList
-        data={data}
-        renderItem={renderMessage}
-        keyExtractor={item => item.id}
-        />
+  function MessagesListView() {
+    return (
+    <FlatList
+    data={data}
+    renderItem={renderMessage}
+    keyExtractor={item => item.id}
+    />
+    )
+  };
+
+  function EmptyMessagesView() {
+    return (
+      <Text>
+        {strings.messages.empty}
+      </Text>
+    )
+  }
+
+  return ( 
+      <View style={styles.container}>
+    <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
+      {strings.messages.header}
+    </Text>
+      {data ? <MessagesListView/> : <EmptyMessagesView/>}
     </View>
   );
 }
