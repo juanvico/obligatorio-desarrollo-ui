@@ -99,27 +99,6 @@ function CreateItem() {
           value={description}
           style={styles.multilineText}
         />
-       
-        <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
-          {strings.createItem.latitude}
-        </Text>
-        <TextField
-          accessibilityHint={strings.createItem.latitudeHint}
-          accessibilityLabel={strings.createItem.latitude}
-          onChangeText={setPickupLatitude}
-          placeholder={strings.createItem.latitudeHint}
-          value={pickupLatitude}
-        />
-        <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
-          {strings.createItem.longitude}
-        </Text>
-        <TextField
-          accessibilityHint={strings.createItem.longitudeHing}
-          accessibilityLabel={strings.createItem.longitude}
-          onChangeText={setPickupLongitude}
-          placeholder={strings.createItem.longitudeHint}
-          value={pickupLongitude}
-        />
         <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
           {strings.createItem.locationDetails}
         </Text>

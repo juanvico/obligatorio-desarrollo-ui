@@ -243,6 +243,8 @@ PODS:
     - react-native-config/App (= 1.4.1)
   - react-native-config/App (1.4.1):
     - React-Core
+  - react-native-geolocation (2.0.2):
+    - React
   - react-native-image-picker (3.1.0):
     - React
   - react-native-mmkv-storage (0.4.2):
@@ -376,6 +378,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-config (from `../node_modules/react-native-config`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-mmkv-storage (from `../node_modules/react-native-mmkv-storage`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -450,6 +453,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-config:
     :path: "../node_modules/react-native-config"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-mmkv-storage:
@@ -525,6 +530,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-config: d8b45133fd13d4f23bd2064b72f6e2c08b2763ed
+  react-native-geolocation: cbd9d6bd06bac411eed2671810f454d4908484a8
   react-native-image-picker: 2ccd792abc06340688982e5eab4067e651f4631a
   react-native-mmkv-storage: 1e00b5e54c566cc11b667f69e19205caff4b434e
   react-native-safe-area-context: 86612d2c9a9e94e288319262d10b5f93f0b395f5

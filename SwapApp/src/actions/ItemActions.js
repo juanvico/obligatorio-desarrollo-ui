@@ -1,4 +1,6 @@
 import { ItemController } from '_controllers';
+import GeoLocationService from '../services/GeoLocationService';
+
 
 export const ITEM_TYPES = {
   CREATE_ITEM: 'CREATE_ITEM',
@@ -25,6 +27,9 @@ payload: { item },
 export const createItem = (title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup) => async dispatch => {
   dispatch(createItemRequest());
   try {
+    const location = await GeoLocationService.getCurrentLocation();
+    pickupLatitude = location.coords.latitude;
+    pickupLongitude = location.coords.longitude;
     const item = await ItemController.createItem({title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup});
     dispatch(createItemSuccess(item));
   } catch (error) {
