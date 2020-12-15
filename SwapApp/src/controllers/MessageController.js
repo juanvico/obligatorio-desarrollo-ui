@@ -1,16 +1,13 @@
-import strings from '_localization';
+import apolloClient from '../client/apollo-client';
+import CREATE_PICKUP_MESSAGE from '_apollo/mutations/createPickupMessage';
 
 class MessageController {
-  static async createMessage(destinatary, body) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (destinatary && body) {
-          resolve({ body });
-        } else {
-          reject(new Error(strings.createMessage.invalidMessage));
-        }
-      }, 500);
+  static createMessage = async ({ destinataryUserEmail, description }) => {
+    const { data } = await apolloClient.mutate({
+      mutation: CREATE_PICKUP_MESSAGE,
+      variables: { destinataryUserEmail, description },
     });
+    return data.pickupMessage;
   }
 }
 

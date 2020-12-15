@@ -1,32 +1,71 @@
 import { useTheme } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { Text, View, Image } from 'react-native';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { createMessage, TYPES } from '_actions/MessageActions';
+import { createMessage, MESSAGE_TYPES } from '_actions/MessageActions';
 import { Button, ErrorView, TextField } from '_components';
 import styles from '_screens/CreateMessage/CreateMessage.styles';
 import { ShadowStyles, TextStyles } from '_theme';
 import strings from '_localization';
+import { isLoadingSelector } from '_selectors/StatusSelectors';
 
 function CreateMessage() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const [body, setBody] = useState('');
-  const destinatary = 'paolafrancescoli@gmail.com' //TODO: fix
+  const isMultiline = true
+  const lines = 4
+  const multilineHeight = 80
 
-  const handleSubmit = () => {
-    dispatch(createMessage(destinatary, body));
-  };
+  // TODO: fix this should be something it knows not hardcoded
+    const item =
+    {
+      id: '1',
+      title: 'Cup', 
+      description: 'vintage cup', 
+      image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
+      latitude: -51,
+      longitue: 0,
+      availableToPickup: true,
+      locationDetails: '2nd floor',
+      userName: 'Paola',
+      userEmail: 'paolafrancescoli@gmail.com',
+      distance: 1,
+    };
 
-  const isLoading = false
+  const handleSubmit = useCallback(() => {
+    dispatch(createMessage(item.userName, body));
+  }, [dispatch, createMessage, item.userName, body])
+
+
+  const isLoading = useSelector(state =>
+    isLoadingSelector([MESSAGE_TYPES.CREATE_MESSAGE], state)
+  );
 
   return (
-    <View style={styles.container}>
+    <View>
+
+        <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
+          <Image style={styles.itemImage} source={ { uri: item.image}} />
+          
+          <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
+            {item.title}
+          </Text>
+          <Text style={[TextStyles.textField, { color: colors.text }]}>
+            {item.description}
+          </Text>
+          <Text style={[TextStyles.textField, { color: colors.text }]}>
+          {strings.items.owner} {item.userName} {item.userEmail}
+          </Text>
+          <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
+          {strings.items.distance} {item.distance} {strings.items.unit}
+          </Text>
+        </View>
+
+      
       <View
         style={[
-          styles.formContainer,
-          ShadowStyles.shadow,
-          { backgroundColor: colors.primary },
+          styles.messageContainer
         ]}
       >
         <Text style={[TextStyles.fieldTitle, { color: colors.text }]}>
@@ -38,6 +77,10 @@ function CreateMessage() {
           onChangeText={setBody}
           placeholder={strings.createMessage.body}
           value={body}
+          multiline={isMultiline}
+          numberOfLines={lines}
+          minHeight={multilineHeight}
+          maxHeight={multilineHeight}
         />
         {/* <ErrorView errors={errors} /> */}
         <Button
