@@ -30,7 +30,7 @@ function CreateItem() {
   const multilineHeight = 60
   
   const handleSubmit = () => {
-    dispatch(createItem(title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup));
+    dispatch(createItem(title, description, itemImage.sourceURL, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup));
   };
 
   const chooseImageFromCamera = () => {

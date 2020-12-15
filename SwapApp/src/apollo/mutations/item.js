@@ -5,8 +5,8 @@ const CREATE_ITEM = gql`
      $title: String!,
      $description: String!,
      $image: String!,
-     $pickupLatitude: String!,
-     $pickupLongitude: String!,
+     $pickupLatitude: Float!,
+     $pickupLongitude: Float!,
      $pickupLocation: String!,
      $availableToPickup: Boolean
      ) {

@@ -21,10 +21,10 @@ type: TYPES.CREATE_ITEM_SUCCESS,
 payload: { item },
 });
 
-export const createItem = (title, description, image, latitude, longitude, locationDetails) => async dispatch => {
-  dispatch(createMessageRequest());
+export const createItem = (title, description, image, latitude, longitude, locationDetails, availableToPickup) => async dispatch => {
+  dispatch(createItemRequest());
   try {
-    const item = await ItemController.createItem(title, description, image, latitude, longitude, locationDetails);
+    const item = await ItemController.createItem(title, description, image, latitude, longitude, locationDetails, availableToPickup);
     dispatch(createItemSuccess(item));
   } catch (error) {
     dispatch(createItemError(error.message));
