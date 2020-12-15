@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 const MY_ITEMS = gql`
   query {
-   items {
+   myItems {
       _id
       title
       description
