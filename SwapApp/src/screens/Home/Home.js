@@ -1,5 +1,5 @@
-import { useTheme } from '@react-navigation/native';
-import React from 'react';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 import { Text, View, ScrollView, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import strings from '_localization';
@@ -7,11 +7,13 @@ import styles from '_screens/Home/Home.styles';
 import { getUser } from '_selectors/UserSelectors';
 import { TextStyles } from '_theme';
 import { Button } from '_components';
+import { NAVIGATION } from '_constants';
 
 function Home() {
   const { colors } = useTheme();
   const user = useSelector(getUser);
-  
+  const navigation = useNavigation();
+
   // TODO: get from backend not hardcoded
   const items = [
     {
@@ -43,8 +45,7 @@ function Home() {
   ]
 
   const sendMessage = () => {
-    // TODO: wasn't recognising ImagePicker even though dependency and access keys are there
-    console.log('send message routing needs implementation');
+    navigation.navigate(NAVIGATION.createMessage)
   };
 
   return (
