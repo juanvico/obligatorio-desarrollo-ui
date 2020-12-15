@@ -14,9 +14,6 @@ function MyItems() {
   const dispatch = useDispatch();
   var data = useSelector(state => state.item.myItems);
 
-  console.log('my items:');
-  console.log(data);
-
   useEffect(() => {
     dispatch(myItems())
   }, [myItems])
