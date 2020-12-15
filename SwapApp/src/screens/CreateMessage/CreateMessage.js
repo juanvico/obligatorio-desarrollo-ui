@@ -34,8 +34,8 @@ function CreateMessage() {
     };
 
   const handleSubmit = useCallback(() => {
-    dispatch(createMessage(item.userName, body));
-  }, [dispatch, createMessage, item.userName, body])
+    dispatch(createMessage(item.userEmail, body));
+  }, [dispatch, createMessage, item.userEmail, body])
 
 
   const isLoading = useSelector(state =>

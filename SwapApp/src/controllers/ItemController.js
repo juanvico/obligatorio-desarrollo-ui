@@ -16,14 +16,14 @@ class ItemController {
       query: ITEMS,
       variables: { lat, lng },
     })
-    return data.me
+    return data.items
   }
 
   static myItems = async () => {
     const { data } = await apolloClient.query({
       query: MY_ITEMS
     })
-    return data.me
+    return data.items
   }
 }
 

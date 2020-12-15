@@ -1,8 +1,14 @@
 import gql from 'graphql-tag';
 
 const ITEMS = gql`
-  query {
-   items {
+  query items(
+    $lat: Float!, 
+    $lng: Float!
+    ) {
+   items(
+     lat: $lat, 
+     lng: $lng
+     ) {
       _id
       title
       description
