@@ -1,32 +1,22 @@
 import { useTheme } from '@react-navigation/native';
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Text, View, FlatList, Image } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '_actions/UserActions';
 import { Button } from '_components';
 import strings from '_localization';
 import styles from '_screens/Profile/Profile.styles';
 import { TextStyles } from '_theme';
+import { myItems } from '_actions/ItemActions';
 
 function MyItems() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
+  const data = useSelector(state => state.myItems);
 
-  //TODO: get from server my items
-  const data = [
-    {
-      id: '3',
-      title: 'Chair',
-      description: 'a lovely launch chair',
-      image: 'https://image.freepik.com/psd-gratis/sillon-almohada_176382-861.jpg',
-      latitude: -51,
-      longitue: 0,
-      availableToPickup: true,
-      locationDetails: 'brick building',
-      userName: 'Paola',
-      userEmail: 'paolafrancescoli@gmail.com'
-    }
-  ]
+  useEffect(() => {
+    dispatch(myItems)
+  }, [myItems])
 
   const renderItem = ({ item }) => (
     <ItemView item={item} />
