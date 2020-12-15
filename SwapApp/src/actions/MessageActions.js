@@ -55,6 +55,7 @@ export const myMessages = () => async dispatch => {
   dispatch(myMessagesRequest());
   try {
     const myMessages = await MessageController.myMessages();
+    console.log(myMessages);
     dispatch(myMessagesSuccess(myMessages));
   } catch (error) {
     dispatch(myMessagesError(error.message));

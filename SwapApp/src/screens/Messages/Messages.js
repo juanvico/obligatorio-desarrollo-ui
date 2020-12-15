@@ -1,5 +1,7 @@
 import { useTheme } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { myMessages } from '_actions/MessageActions';
 import { Text, View, FlatList } from 'react-native';
 import strings from '_localization';
 import styles from '_screens/Messages/Messages.styles';
@@ -7,24 +9,12 @@ import { TextStyles } from '_theme';
 
 function Messages() {
   const { colors } = useTheme();
- 
-  // TODO: get from backend not hardcoded
- const data = [
-  {
-    id: '1',
-    description: 'Hi! I am interested in the cup',
-    destinatary: 'paolafrancescoli@gmail.com',
-    userName: 'Lucia',
-    userEmail: 'lucia@mail.com'
-  },
-  {
-    id: '2',
-    description: 'Hi! Love the cup, call me!', 
-    destinatary: 'paolafrancescoli@gmail.com',
-    userName: 'Jenny',
-    userEmail: 'jenny@mail.com'
-  },
-]
+  const dispatch = useDispatch()
+  const data = useSelector(state => state.myMessages);
+
+  useEffect(() => {
+    dispatch(myMessages)
+  }, [myMessages])
 
 const renderMessage = ({ item }) => (
   <MessageView item={item} />

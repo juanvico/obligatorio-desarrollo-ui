@@ -1,48 +1,25 @@
 import { useTheme, useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Text, View, ScrollView, Image, FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import strings from '_localization';
 import styles from '_screens/Home/Home.styles';
 import { getUser } from '_selectors/UserSelectors';
 import { TextStyles } from '_theme';
 import { Button } from '_components';
 import { NAVIGATION } from '_constants';
+import { exploreItems } from '_actions/ItemActions';
 
 function Home() {
   const { colors } = useTheme();
   const user = useSelector(getUser);
   const navigation = useNavigation();
+  const data = useSelector(state => state.exploreItems);
+  const dispatch = useDispatch();
 
-  // TODO: get from backend not hardcoded
-  const data = [
-    {
-      id: '1',
-      title: 'Cup', 
-      description: 'vintage cup', 
-      image: 'https://image.freepik.com/psd-gratis/mock-up-taza-sobre-fondo-verde_1307-195.jpg',
-      latitude: -51,
-      longitue: 0,
-      availableToPickup: true,
-      locationDetails: '2nd floor',
-      userName: 'Paola',
-      userEmail: 'paolafrancescoli@gmail.com',
-      distance: 1,
-    },
-    {
-      id: '2',
-      title: 'Cup', 
-      description: 'new cup', 
-      image: 'https://image.freepik.com/vector-gratis/tazas-asa_1308-41607.jpg',
-      latitude: -52,
-      longitue: 0,
-      availableToPickup: true,
-      locationDetails: 'first floor',
-      userName: 'Lucia',
-      userEmail: 'lucia@mail.com',
-      distance: 2,
-    }
-  ]
+  useEffect(() => {
+    dispatch(exploreItems)
+  }, [exploreItems])
 
 
   const sendMessage = () => {
