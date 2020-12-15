@@ -13,7 +13,7 @@ function Messages() {
   const data = useSelector(state => state.myMessages);
 
   useEffect(() => {
-    dispatch(myMessages)
+    dispatch(myMessages())
   }, [myMessages])
 
 const renderMessage = ({ item }) => (

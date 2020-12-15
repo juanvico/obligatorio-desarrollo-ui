@@ -15,7 +15,7 @@ function MyItems() {
   const data = useSelector(state => state.myItems);
 
   useEffect(() => {
-    dispatch(myItems)
+    dispatch(myItems())
   }, [myItems])
 
   const renderItem = ({ item }) => (

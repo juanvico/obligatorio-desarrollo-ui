@@ -48,7 +48,7 @@ payload: { exploreItems },
 });
 
 const myItemRequest = () => ({
-  type: ITEM_TYPES.MY_REQUEST,
+  type: ITEM_TYPES.MY_ITEMS_REQUEST,
   payload: null,
 });
 

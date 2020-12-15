@@ -18,7 +18,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(exploreItems)
+    dispatch(exploreItems())
   }, [exploreItems])
 
 
