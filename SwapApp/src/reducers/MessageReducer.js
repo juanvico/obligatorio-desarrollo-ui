@@ -1,9 +1,9 @@
-import { TYPES } from '_actions/MessageActions';
+import { MESSAGE_TYPES } from '_actions/MessageActions';
 
 const messageReducer = (state = {}, { payload, type }) => {
   switch (type) {
-    case TYPES.CREATE_MESSAGE_SUCCESS:
-      return state;
+    case MESSAGE_TYPES.MY_MESSAGES:
+      return { ...state, ...payload.myMessages };
    default:
       return state;
   }

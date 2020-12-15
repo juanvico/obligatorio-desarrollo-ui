@@ -1,10 +1,8 @@
 import gql from 'graphql-tag';
 
-const ITEMS = gql`
-  query items (
-     $lat: Float!,
-     $lng: Float!,
-     ){
+const MY_ITEMS = gql`
+  query {
+   items {
       _id
       title
       description
@@ -15,7 +13,8 @@ const ITEMS = gql`
       available_to_pickup
       user_name
       user_email
+   }
  }
 `;
 
-export default ITEMS;
+export default MY_ITEMS;
