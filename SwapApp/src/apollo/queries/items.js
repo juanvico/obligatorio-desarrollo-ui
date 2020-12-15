@@ -1,10 +1,14 @@
 import gql from 'graphql-tag';
 
 const ITEMS = gql`
-  query items (
-     $lat: Float!,
-     $lng: Float!,
-     ){
+  query items(
+    $lat: Float!, 
+    $lng: Float!
+    ) {
+   items(
+     lat: $lat, 
+     lng: $lng
+     ) {
       _id
       title
       description
@@ -15,6 +19,7 @@ const ITEMS = gql`
       available_to_pickup
       user_name
       user_email
+   }
  }
 `;
 

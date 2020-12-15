@@ -18,7 +18,7 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(exploreItems)
+    dispatch(exploreItems())
   }, [exploreItems])
 
 
@@ -54,6 +54,23 @@ function Home() {
       </View>
   );
 
+  function ItemsListView() {
+    return (
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    )
+  };
+
+  function EmptyItemsView() {
+    return (
+      <Text>
+        {strings.home.empty}
+      </Text>
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -64,11 +81,7 @@ function Home() {
           {strings.home.explore}
         </Text>
 
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      { data ? <ItemsListView/> : <EmptyItemsView/>}
       
     </View>
   );

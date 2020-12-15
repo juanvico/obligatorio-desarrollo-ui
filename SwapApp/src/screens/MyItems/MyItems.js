@@ -15,12 +15,30 @@ function MyItems() {
   const data = useSelector(state => state.myItems);
 
   useEffect(() => {
-    dispatch(myItems)
+    dispatch(myItems())
   }, [myItems])
 
   const renderItem = ({ item }) => (
     <ItemView item={item} />
   );
+
+  function ItemsListView() {
+    return (
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    )
+  };
+
+  function EmptyItemsView() {
+    return (
+      <Text>
+        {strings.myItems.empty}
+      </Text>
+    )
+  }
 
   const ItemView = ({ item }) => (
     <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
@@ -42,11 +60,7 @@ function MyItems() {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      { data ? <ItemsListView/> : <EmptyItemsView/>}
     </View>
   );
 }

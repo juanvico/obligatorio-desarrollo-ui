@@ -9,6 +9,7 @@ export default {
     header: 'Home',
     message: 'Welcome',
     explore: 'Explore',
+    empty: 'There are no items yet, come back later',
   },
   login: {
     email: 'Email',
@@ -70,6 +71,10 @@ export default {
   },
   messages: {
     header: 'My inbox',
-    from: 'From: '
+    from: 'From: ',
+    empty: 'Your inbox is empty',
   },
+  myItems: {
+    empty: 'You currently have no items, start by adding some!',
+  }
 };
