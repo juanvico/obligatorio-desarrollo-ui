@@ -13,7 +13,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-const uri ='http://localhost:5000/graphql';
+const uri ='http://10.0.2.2:5000/graphql';
 const httpLink = createHttpLink({
   uri,
 });

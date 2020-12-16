@@ -41,9 +41,9 @@ const MessagesContainer = () => {
     <div className={classes.root}>
       My messages:
       <List>
-       {data?.pickupMessages?.map((myMessage) => (
+       {data?.pickupMessages?.map((myMessage,index) => (
          <div>
-          <ListItem key={myMessage.id} alignItems="flex-start">
+          <ListItem key={index} alignItems="flex-start">
           <ListItemText
             primary={<Typography
             component="span"

@@ -45,12 +45,10 @@ const SendMessageContainer = () => {
   const [description, setDescription] = useState('')
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
 
+  const onCompletedCallback = useCallback(() => { history.push('/messages') }, [history])
   // eslint-disable-next-line 
-  const [createPickupMessage, { data, error, loading }] = useMutation(CREATE_PICKUP_MESSAGE, { fetchPolicy: 'no-cache' });
+  const [createPickupMessage, { data, error, loading }] = useMutation(CREATE_PICKUP_MESSAGE, { fetchPolicy: 'no-cache', onCompleted: onCompletedCallback });
 
-  if (data?.createPickupMessage) {
-    history.push('/messages')
-  }
 
   const handleAddition = useCallback(
     async () => {

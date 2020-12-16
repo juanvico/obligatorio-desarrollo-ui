@@ -1,3 +1,4 @@
+import { call } from 'react-native-reanimated';
 import { ItemController } from '_controllers';
 import GeoLocationService from '../services/GeoLocationService';
 
@@ -62,7 +63,7 @@ type: ITEM_TYPES.MY_ITEMS_SUCCESS,
 payload: { myItems },
 });
 
-export const createItem = (title, description, image, pickupLocation, availableToPickup) => async dispatch => {
+export const createItem = ({title, description, image, pickupLocation, availableToPickup}, callback) => async dispatch => {
   dispatch(createItemRequest());
   try {
     const location = await GeoLocationService.getCurrentLocation();
@@ -70,6 +71,7 @@ export const createItem = (title, description, image, pickupLocation, availableT
     var pickupLongitude = location.coords.longitude;
     const item = await ItemController.createItem({title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup});
     dispatch(createItemSuccess(item));
+    !!callback && callback();
   } catch (error) {
     dispatch(createItemError(error.message));
   }

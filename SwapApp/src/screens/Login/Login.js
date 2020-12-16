@@ -11,6 +11,7 @@ import errorsSelector from '_selectors/ErrorSelectors';
 import { isLoadingSelector } from '_selectors/StatusSelectors';
 import { ShadowStyles, TextStyles } from '_theme';
 import { NAVIGATION } from '_constants';
+import { validate } from 'graphql';
 
 function Login() {
   const { colors } = useTheme();
@@ -18,6 +19,7 @@ function Login() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [validateInputs, setValidateInputs] = useState([]);
 
   const isLoading = useSelector(state =>
     isLoadingSelector([TYPES.LOGIN], state)
@@ -27,10 +29,11 @@ function Login() {
     state => errorsSelector([TYPES.LOGIN], state),
     shallowEqual
   );
-
   const handleSubmit = useCallback(() => {
-    dispatch(login(email, password));
-  }, [dispatch, login, email, password])
+    if (email === '') setValidateInputs([...validateInputs, "Email required"])
+    else if (password === '') setValidateInputs([...validateInputs, "Password required"])
+    else dispatch(login(email, password));
+  }, [dispatch, login, email, password, validateInputs, setValidateInputs])
 
   const handleRegister = () => {
     navigation.navigate(NAVIGATION.register)
@@ -66,7 +69,7 @@ function Login() {
           placeholder={strings.login.password}
           value={password}
         />
-        <ErrorView errors={errors} />
+        <ErrorView errors={[...errors, ...validateInputs]} />
         <Button
           onPress={handleSubmit}
           style={styles.submitButton}
@@ -74,7 +77,7 @@ function Login() {
         />
         <TouchableOpacity onPress={handleRegister} style={styles.secondaryButton}>
           <Text style={[TextStyles.selectableText, { color: colors.text }]}>
-              {strings.login.register}
+            {strings.login.register}
           </Text>
         </TouchableOpacity>
       </View>

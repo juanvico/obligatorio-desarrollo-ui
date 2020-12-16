@@ -42,8 +42,8 @@ const MyItems = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
-      {data?.myItems?.map((tile) => (
-          <Grid item key={tile} xs={12} sm={6} md ={4}>
+      {data?.myItems?.map((tile, index) => (
+          <Grid item key={index} xs={12} sm={6} md ={4}>
             <Card className={classes.card}>
               <CardActionArea>
               <CardMedia 
