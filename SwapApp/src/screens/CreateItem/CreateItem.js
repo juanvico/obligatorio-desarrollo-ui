@@ -1,21 +1,22 @@
 import { useNavigation, useTheme } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import { Button, ErrorView, TextField } from '_components';
 import styles from '_screens/CreateItem/CreateItem.styles';
-import { ShadowStyles, TextStyles } from '_theme';
+import { TextStyles } from '_theme';
 import strings from '_localization';
 import { createItem, exploreItems, ITEM_TYPES } from '_actions/ItemActions';
 import ImagePicker from 'react-native-image-crop-picker';
-import { ScrollView } from 'react-native-gesture-handler';
 import cameraIcon from '_assets/ic_camera/ic_camera.png';
 import galleryIcon from '_assets/ic_gallery/ic_gallery.png';
-import errorsSelector from '_selectors/ErrorSelectors';
 import { isLoadingSelector } from '_selectors/StatusSelectors';
 import { NAVIGATION } from '_constants';
 
 
+const PLACE_HOLDER_IMAGE = 'https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg'
 
 function CreateItem() {
   const { colors } = useTheme();
@@ -23,9 +24,8 @@ function CreateItem() {
   const navigation = useNavigation();
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [itemImage, setItemImage] = useState('https://image.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg')
+  const [itemImage, setItemImage] = useState(PLACE_HOLDER_IMAGE)
   const [pickupLocation, setPickupLocation] = useState('')
-  const [availableToPickup, setAvailableToPickup] = useState(true);
   const [errors, setErrors] = useState([]);
   const isMultiline = true
   const lines = 3
@@ -36,18 +36,37 @@ function CreateItem() {
     else if (description === '') setErrors([...errors, "description required"])
     else if (itemImage === '') setErrors([...errors, "itemImage required"])
     else if (pickupLocation === '') setErrors([...errors, "pickupLocation required"])
-    else if (availableToPickup === '') setErrors([...errors, "availableToPickup required"])
     else dispatch(createItem({
       title,
       description,
-      itemImage,
+      image: itemImage,
       pickupLocation,
-      availableToPickup
+      availableToPickup: true
     }, () => {
       dispatch(exploreItems())
+      setTitle('')
+      setDescription('')
+      setItemImage(PLACE_HOLDER_IMAGE)
+      setPickupLocation('')
+      setErrors([])
       navigation.navigate(NAVIGATION.home)
     }));
-  }, [dispatch, createItem, title, description, itemImage, pickupLocation, availableToPickup, errors, setErrors, exploreItems, navigation])
+  }, [
+    dispatch,
+    createItem,
+    title,
+    description,
+    itemImage,
+    pickupLocation,
+    errors,
+    setErrors,
+    exploreItems,
+    setTitle,
+    setDescription,
+    setItemImage,
+    setPickupLocation,
+    navigation
+  ])
 
   const chooseImageFromCamera = () => {
     ImagePicker.openCamera({
@@ -78,9 +97,8 @@ function CreateItem() {
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.primary }]}>
-      <ScrollView>
-
+    <KeyboardAwareScrollView>
+      <View style={[styles.container, { backgroundColor: colors.primary }]}>
         <View style={styles.horizontalContainer}>
           <Image style={styles.itemImage} source={{ uri: itemImage }} />
           <View>
@@ -133,8 +151,8 @@ function CreateItem() {
           style={styles.submitButton}
           title={isLoading ? strings.actions.loading : strings.createItem.button}
         />
-      </ScrollView>
-    </View>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 

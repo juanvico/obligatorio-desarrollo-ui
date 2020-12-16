@@ -9,13 +9,7 @@ import { getUser } from '_selectors/UserSelectors';
 import { theme } from '_theme';
 
 const RootNavigator = () => {
-  const dispatch = useDispatch()
   const user = useSelector(getUser);
-
-  useEffect(() => {
-    dispatch(me)
-  }, [me])
-
   const scheme = useColorScheme();
 
   return (

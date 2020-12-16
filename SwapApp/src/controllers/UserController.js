@@ -13,26 +13,31 @@ class UserController {
       variables: { email, password },
     });
     AsyncStorage.setItem('authorization', data.login.token)
-    debugger;
     return data.login;
   }
 
-  static register = async ({name, email, password}) => {
+  static register = async ({ name, email, password }) => {
     const { data } = await apolloClient.mutate({
       mutation: CREATE_USER,
       variables: { email, password, name },
     });
+    AsyncStorage.setItem('authorization', data.createUser.token)
     return data.createUser;
   }
 
   static me = async () => {
-    const { data } = await apolloClient.query({
-      query: ME
-    })
-    return data.me
+    try {
+      const { data } = await apolloClient.query({
+        query: ME
+      })
+      return data.me
+    } catch (error) {
+      AsyncStorage.removeItem('authorization')
+    }
   }
 
   static async logout() {
+    AsyncStorage.removeItem('authorization')
     return new Promise(resolve => {
       setTimeout(resolve, 500);
     });

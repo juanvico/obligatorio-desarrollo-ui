@@ -1,3 +1,5 @@
+import Snackbar from 'react-native-snackbar';
+
 import { MessageController } from '_controllers';
 
 export const MESSAGE_TYPES = {
@@ -41,22 +43,36 @@ type: MESSAGE_TYPES.MY_MESSAGES_SUCCESS,
 payload: { myMessages },
 });
 
-export const createMessage = (destinataryUserEmail, description) => async dispatch => {
+export const createMessage = ({destinataryUserEmail, description}, callback) => async dispatch => {
   dispatch(createMessageRequest());
   try {
     const theMessage = await MessageController.createMessage({destinataryUserEmail, description});
     dispatch(createMessageSuccess(theMessage));
+    Snackbar.show({
+      text: 'Message created successfully!',
+      backgroundColor: 'green',
+    });
+    !!callback && callback();
   } catch (error) {
+    Snackbar.show({
+      text: error.messsage,
+      text: 'Oops, error creating message, please try again later',
+    });
     dispatch(createMessageError(error.message));
   }
 };
 
-export const myMessages = () => async dispatch => {
+export const myMessages = (callback) => async dispatch => {
   dispatch(myMessagesRequest());
   try {
     const myMessages = await MessageController.myMessages();
     dispatch(myMessagesSuccess(myMessages));
+    !!callback && callback()
   } catch (error) {
+    Snackbar.show({
+      text: 'Oops, error getting my messages, please try again later',
+      backgroundColor: 'red',
+    });
     dispatch(myMessagesError(error.message));
   }
 };

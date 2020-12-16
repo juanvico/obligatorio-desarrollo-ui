@@ -5,6 +5,7 @@ import PICKUP_MESSAGES from '_apollo/queries/pickupMessages';
 class MessageController {
   static createMessage = async ({ destinataryUserEmail, description }) => {
     const { data } = await apolloClient.mutate({
+      fetchPolicy: 'no-cache',
       mutation: CREATE_PICKUP_MESSAGE,
       variables: { destinataryUserEmail, description },
     });
@@ -13,7 +14,8 @@ class MessageController {
 
   static myMessages = async () => {
     const { data } = await apolloClient.query({
-      query: PICKUP_MESSAGES
+      query: PICKUP_MESSAGES,
+      fetchPolicy: 'no-cache',
     })
     return data.pickupMessages
   }

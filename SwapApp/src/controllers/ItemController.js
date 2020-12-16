@@ -6,6 +6,7 @@ import MY_ITEMS from '_apollo/queries/myItems';
 class ItemController {
   static createItem = async ({ title, description, image , pickupLatitude, pickupLongitude, pickupLocation, availableToPickup}) => {
     const { data } = await apolloClient.mutate({
+      fetchPolicy: 'no-cache',
       mutation: CREATE_ITEM,
       variables: { title, description, image , pickupLatitude, pickupLongitude, pickupLocation, availableToPickup },
     });
@@ -14,6 +15,7 @@ class ItemController {
   
   static exploreItems = async ({ lat, lng }) => {
     const { data } = await apolloClient.query({
+      fetchPolicy: 'no-cache',
       query: ITEMS,
       variables: { lat, lng },
     })
@@ -22,6 +24,7 @@ class ItemController {
 
   static myItems = async () => {
     const { data } = await apolloClient.query({
+      fetchPolicy: 'no-cache',
       query: MY_ITEMS
     })
     return data.myItems

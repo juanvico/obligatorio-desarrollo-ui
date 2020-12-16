@@ -1,19 +1,19 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { onError } from "@apollo/client/link/error";
+// import { onError } from "@apollo/client/link/error";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors)
-    graphQLErrors.map(({ message, locations, path }) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-      )
-    );
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors)
+//     graphQLErrors.map(({ message, locations, path }) =>
+//       console.log(
+//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+//       )
+//     );
+//   if (networkError) console.log(`[Network error]: ${networkError}`);
+// });
 
-const uri ='http://10.0.2.2:5000/graphql';
+const uri ='https://ui-backend.herokuapp.com/graphql';
 const httpLink = createHttpLink({
   uri,
 });
@@ -31,7 +31,7 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const client = new ApolloClient({
-  link: errorLink.concat(authLink).concat(httpLink),
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
