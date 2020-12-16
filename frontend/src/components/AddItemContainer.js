@@ -54,6 +54,7 @@ const AddItemContainer = () => {
   const onCompletedCallback = useCallback(() => { history.push('/') }, [history])
   const [createItem, { loading }] = useMutation(CREATE_ITEM, { fetchPolicy: 'no-cache', onCompleted: onCompletedCallback });
 
+
   const handleAddition = useCallback(
     () => {
       if (title === '') setErrors([true, 'Enter title'])
