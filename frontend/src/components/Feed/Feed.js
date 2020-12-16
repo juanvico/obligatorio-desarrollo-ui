@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -35,24 +35,29 @@ const useStyles = makeStyles((theme) => ({
 
 const Feed = () => {
   const classes = useStyles();
-  const [lat, setLat] = useState('')
-  const [lng, setLng] = useState('')
- 
+  const [lat, setLat] = useState(0)
+  const [lng, setLng] = useState(0)
+
   // eslint-disable-next-line 
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function (position) {
-      setLat(position.coords.latitude);
-      setLng(position.coords.longitude);
-    });
-  }
-  const { loading, error, data } = useQuery(PICKUP_ITEMS, {
-    variables: { lat: parseFloat(lat), lng: parseFloat(lng) } });
-  if (loading) return 'Loading...';
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      });
+    }
+  }, [])
+
+  const { loading, data } = useQuery(PICKUP_ITEMS, {
+    variables: { lat: parseFloat(lat), lng: parseFloat(lng) }
+  });
+
+  if (loading || (lat === 0 && lng === 0)) return 'Loading...';
   return (
     <div className={classes.root}>
       <Grid container spacing={4}>
-        {data?.items?.map((tile) => (
-          <Grid item key={tile} xs={12} sm={6} md={4}>
+        {data?.items?.map((tile,index) => (
+          <Grid item key={index} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardActionArea>
                 <CardMedia

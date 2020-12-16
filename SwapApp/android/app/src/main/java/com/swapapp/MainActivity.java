@@ -1,6 +1,5 @@
-import android.os.Bundle;
-
 package com.swapapp;
+import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 import com.zoontek.rnbootsplash.RNBootSplash;

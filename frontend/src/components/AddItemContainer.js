@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Button, TextField, FormHelperText, Switch, FormControlLabel } from '@material-ui/core';
 import { Typography, makeStyles } from '@material-ui/core';
 import { useMutation } from '@apollo/client';
@@ -38,27 +38,35 @@ const AddItemContainer = () => {
   const [availableToPickup, setAvailableToPickup] = useState(true);
   const [[hasError, errorMessage], setErrors] = useState([false, '']);
   const history = useHistory()
-  
-  // eslint-disable-next-line 
-  const [createItem, { data, error, loading }] = useMutation(CREATE_ITEM, { fetchPolicy: 'no-cache' });
 
-  if (data?.createItem) {
-    history.push('/')
-  }
+
+  // eslint-disable-next-line 
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setPickupLatitude(position.coords.latitude);
+        setPickupLongitude(position.coords.longitude);
+      });
+    }
+  }, [])
+
+  const onCompletedCallback = useCallback(() => { history.push('/') }, [history])
+  const [createItem, { data, error, loading }] = useMutation(CREATE_ITEM, { fetchPolicy: 'no-cache', onCompleted: onCompletedCallback });
 
   const handleAddition = useCallback(
-    async () => {
-      try {
-        if (title === '') setErrors([true, 'Enter title'])
-        else if (description === '') setErrors([true, 'Enter description'])
-        else if (image === '') setErrors([true, 'Enter image URL'])
-        else if (pickupLatitude === '') setErrors([true, 'Enter Pickup Latitude (between -90 and 90) yours is:' + pickupLatitude])
-        else if (pickupLongitude === '' ) setErrors([true, 'Enter Pickup Longitude (between -180 and 180) yours is:' + pickupLongitude])
-        else if (pickupLocation === '') setErrors([true, 'Enter Pickup Details'])
-        else await createItem({ variables: { title, description, image, pickupLatitude, pickupLongitude, pickupLocation, availableToPickup } })
-      } catch (error) {
-        console.log(error)
-      }
+    () => {
+      if (title === '') setErrors([true, 'Enter title'])
+      else if (description === '') setErrors([true, 'Enter description'])
+      else if (image === '') setErrors([true, 'Enter image URL'])
+      else if (pickupLocation === '') setErrors([true, 'Enter Pickup Details'])
+      else createItem({
+        variables: {
+          title, description, image, pickupLatitude: parseFloat(pickupLatitude),
+          pickupLongitude: parseFloat(pickupLongitude), pickupLocation, availableToPickup
+        }
+      })
+
     },
     [title,
       description,
@@ -111,30 +119,7 @@ const AddItemContainer = () => {
         value={image}
         onChange={e => setImage(e.target.value)}
       />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="pickup-latitude"
-        label="Pickup Location Latitude"
-        id="pickup-latitude"
-        value={pickupLatitude}
-        onChange={e => setPickupLatitude(e.target.value)}
-      />
-      <TextField
-        multiline
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="pickup-longitude"
-        label="Pickup Location Longitude"
-        id="pickup-longitude"
-        value={pickupLongitude}
-        onChange={e => setPickupLongitude(e.target.value)}
-      />
+
       <TextField
         multiline
         variant="outlined"

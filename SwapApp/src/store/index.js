@@ -7,7 +7,7 @@ import storage from '_storage';
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['error', 'status'],
+  blacklist: ['error', 'status', 'user', 'item', 'message'],
 };
 
 export const store = createStore(
