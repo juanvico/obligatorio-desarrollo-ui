@@ -37,11 +37,11 @@ const MyItems = () => {
   const classes = useStyles();
 
   // eslint-disable-next-line 
-  const { loading, error, data } = useQuery(MYITEMS, { fetchPolicy: 'network-only' });
+  const { loading, error, data } = useQuery(MYITEMS, { fetchPolicy: 'no-cache' });
   if (loading) return 'Loading...';
   return (
     <div className={classes.root}>
-      {data.myItems === [] ? (
+      {data.myItems.length > 0 ? (
         <>
           <Grid container spacing={4}>
             {data?.myItems?.map((tile, index) => (

@@ -33,18 +33,18 @@ const MessagesContainer = () => {
   const classes = useStyles();
 
   // eslint-disable-next-line 
-  const { loading, error, data } = useQuery(PICKUP_MESSAGES, { fetchPolicy: 'network-only' });
+  const { loading, error, data } = useQuery(PICKUP_MESSAGES, { fetchPolicy: 'no-cache' });
 
   if (loading) return 'Loading...';
   return (
     <div className={classes.root}>
-      {data.pickupMessages === [] ? (
+      {data.pickupMessages.length > 0 ? (
         <>
           My messages:
           <List>
             {data?.pickupMessages?.map((myMessage, index) => (
-              <div>
-                <ListItem key={index} alignItems="flex-start">
+              <div key={myMessage._id}>
+                <ListItem alignItems="flex-start">
                   <ListItemText
                     primary={<Typography
                       component="span"
