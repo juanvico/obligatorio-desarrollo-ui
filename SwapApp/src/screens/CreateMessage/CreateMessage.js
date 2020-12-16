@@ -1,16 +1,19 @@
-import { useTheme, useRoute } from '@react-navigation/native';
+import { useTheme, useRoute, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
 import { Text, View, Image } from 'react-native';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createMessage, MESSAGE_TYPES } from '_actions/MessageActions';
 import { Button, ErrorView, TextField } from '_components';
 import styles from '_screens/CreateMessage/CreateMessage.styles';
-import { ShadowStyles, TextStyles } from '_theme';
+import { TextStyles } from '_theme';
 import strings from '_localization';
 import { isLoadingSelector } from '_selectors/StatusSelectors';
+import { NAVIGATION } from '_constants';
 
 function CreateMessage() {
   const { colors } = useTheme();
+  const [errors, setErrors] = useState([])
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const route = useRoute();
   const [body, setBody] = useState('');
@@ -21,8 +24,24 @@ function CreateMessage() {
   const item = route.params.item;
 
   const handleSubmit = useCallback(() => {
-    dispatch(createMessage(item.user_email, body));
-  }, [dispatch, createMessage, item.user_email, body])
+    if (body === '') setErrors(['Message must not be empty'])
+    else dispatch(createMessage({
+      destinataryUserEmail: item.user_email,
+      description: body
+    }, () => {
+      setErrors([])
+      setBody([])
+      navigation.navigate(NAVIGATION.inbox)
+    }));
+  }, [
+    dispatch,
+    createMessage,
+    item.user_email,
+    body,
+    setErrors,
+    setBody,
+    navigation,
+  ])
 
 
   const isLoading = useSelector(state =>
@@ -31,25 +50,24 @@ function CreateMessage() {
 
   return (
     <View>
+      <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}>
+        <Image style={styles.itemImage} source={{ uri: item.image }} />
 
-        <View key={item.id} style={[styles.itemContainer, { backgroundColor: colors.card }]}> 
-          <Image style={styles.itemImage} source={ { uri: item.image}} />
-          
-          <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
-            {item.title}
-          </Text>
-          <Text style={[TextStyles.textField, { color: colors.text }]}>
-            {item.description}
-          </Text>
-          <Text style={[TextStyles.textField, { color: colors.text }]}>
+        <Text style={[TextStyles.lightTitle, { color: colors.text }]}>
+          {item.title}
+        </Text>
+        <Text style={[TextStyles.textField, { color: colors.text }]}>
+          {item.description}
+        </Text>
+        <Text style={[TextStyles.textField, { color: colors.text }]}>
           {strings.items.owner} {item.user_name}
-          </Text>
-          <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
+        </Text>
+        <Text style={[TextStyles.secondaryText, { color: colors.text }]}>
           {strings.items.distance} {item.distance} {strings.items.unit}
-          </Text>
-        </View>
+        </Text>
+      </View>
 
-      
+
       <View
         style={[
           styles.messageContainer
@@ -69,7 +87,7 @@ function CreateMessage() {
           minHeight={multilineHeight}
           maxHeight={multilineHeight}
         />
-        {/* <ErrorView errors={errors} /> */}
+        <ErrorView errors={errors} />
         <Button
           onPress={handleSubmit}
           style={styles.submitButton}

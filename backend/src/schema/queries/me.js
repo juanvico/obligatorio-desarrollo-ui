@@ -14,7 +14,7 @@ module.exports = {
 			return context.loggedUser
 		}
 		catch (ex) {
-			console.log("Error when getting User", ex.stack);
+			return 'Invalid authorization token'
 		}
 	}
 };

@@ -30,7 +30,7 @@ function Register() {
   );
 
   const handleSubmit = useCallback(() => {
-    dispatch(register(name, email, password));
+    dispatch(register({ name, email: email.toLowerCase(), password }));
   }, [dispatch, register, name, email, password])
 
   const handleLogin = () => {
@@ -96,7 +96,7 @@ function Register() {
         />
         <TouchableOpacity onPress={handleLogin} style={styles.secondaryButton}>
           <Text style={[TextStyles.selectableText, { color: colors.text }]}>
-              {strings.register.login}
+            {strings.register.login}
           </Text>
         </TouchableOpacity>
       </View>

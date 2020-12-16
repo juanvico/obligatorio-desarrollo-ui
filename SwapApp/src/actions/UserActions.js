@@ -1,3 +1,5 @@
+import Snackbar from 'react-native-snackbar';
+
 import { UserController } from '_controllers';
 
 export const TYPES = {
@@ -65,33 +67,46 @@ const clearStore = () => ({
   payload: null,
 });
 
-export const login = (email, password) => async dispatch => {
+export const login = ({ email, password }, callback) => async dispatch => {
+
   dispatch(loginRequest());
   try {
-    const user = await UserController.login({email, password});
+    const user = await UserController.login({ email, password });
     dispatch(loginSuccess(user));
+    !!callback && callback()
   } catch (error) {
     dispatch(loginError(error.message));
   }
 };
 
-export const register = (name, email, password) => async dispatch => {
+export const register = ({ name, email, password }, callback) => async dispatch => {
   dispatch(registerRequest());
   try {
-    const user = await UserController.register({name, email, password});
+    const user = await UserController.register({ name, email, password });
     dispatch(registerSuccess(user));
+    Snackbar.show({
+      text: 'User registered successfully!',
+      backgroundColor: 'green',
+    });
+    !!callback && callback()
   } catch (error) {
     dispatch(registerError(error.message));
+    Snackbar.show({
+      text: 'Oops, error registering, please try again later',
+      backgroundColor: 'red',
+    });
   }
 };
 
-export const me = () => async dispatch => {
+export const me = (callback) => async dispatch => {
   dispatch(meRequest());
   try {
     const user = await UserController.me();
-    dispatch(meRequest(user));
+    dispatch(meSuccess(user));
   } catch (error) {
     dispatch(meError(error.message));
+  } finally {
+    !!callback && callback()
   }
 };
 

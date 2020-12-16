@@ -32,7 +32,12 @@ function Login() {
   const handleSubmit = useCallback(() => {
     if (email === '') setValidateInputs([...validateInputs, "Email required"])
     else if (password === '') setValidateInputs([...validateInputs, "Password required"])
-    else dispatch(login(email, password));
+    else dispatch(
+      login({
+        email: email.toLowerCase(),
+        password
+      }, () => setValidateInputs([]))
+    );
   }, [dispatch, login, email, password, validateInputs, setValidateInputs])
 
   const handleRegister = () => {

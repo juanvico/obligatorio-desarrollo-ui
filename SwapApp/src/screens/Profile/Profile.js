@@ -8,6 +8,7 @@ import strings from '_localization';
 import styles from '_screens/Profile/Profile.styles';
 import { TextStyles } from '_theme';
 import { NAVIGATION } from '_constants';
+import { myItems } from '_actions/ItemActions';
 
 function Profile() {
   const { colors } = useTheme();
@@ -15,8 +16,9 @@ function Profile() {
   const navigation = useNavigation();
 
   const handleGoMyItems = useCallback(() => {
+    dispatch(myItems())
     navigation.navigate(NAVIGATION.myItems)
-  }, [navigation])
+  }, [navigation, dispatch, myItems])
 
   const logoutUser = () => {
     dispatch(logout());
