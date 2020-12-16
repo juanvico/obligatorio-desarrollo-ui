@@ -36,30 +36,37 @@ const MessagesContainer = () => {
   const { loading, error, data } = useQuery(PICKUP_MESSAGES, { fetchPolicy: 'network-only' });
 
   if (loading) return 'Loading...';
-
   return (
     <div className={classes.root}>
-      My messages:
-      <List>
-       {data?.pickupMessages?.map((myMessage,index) => (
-         <div>
-          <ListItem key={index} alignItems="flex-start">
-          <ListItemText
-            primary={<Typography
-            component="span"
-            variant="body2"
-            className={classes.inline}
-            color="textPrimary"
-          >
-            From: {myMessage.user_name} ({myMessage.user_email})
+      {data.pickupMessages === [] ? (
+        <>
+          My messages:
+          <List>
+            {data?.pickupMessages?.map((myMessage, index) => (
+              <div>
+                <ListItem key={index} alignItems="flex-start">
+                  <ListItemText
+                    primary={<Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="textPrimary"
+                    >
+                      From: {myMessage.user_name} ({myMessage.user_email})
           </Typography>}
-            secondary={myMessage.description}
-          />
-          </ListItem>
-          <Divider/>
-          </div>
-          ))}
-      </List> 
+                    secondary={myMessage.description}
+                  />
+                </ListItem>
+                <Divider />
+              </div>
+            ))}
+          </List>
+        </>
+      ) : (
+          <>
+            Empty messages.
+          </>
+        )}
     </div>
   );
 }
