@@ -31,14 +31,15 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const classes = useStyles();
   const history = useHistory();
-
   const [[hasError, errorMessage], setHasError] = useState([false, '']);
-  const [login, { data, error, loading }] = useMutation(LOGIN, { fetchPolicy: 'no-cache', errorPolicy: 'ignore' });
 
-  if (data?.login) {
-    localStorage.setItem('authorization', data.login.token);
-    history.push('/')
-  }
+  const onCompletedCallback = useCallback(() => { history.push('/') }, [history])
+  const [login, {data, error, loading }] = useMutation(LOGIN, { fetchPolicy: 'no-cache', errorPolicy: 'ignore', onCompleted: onCompletedCallback });
+
+  
+   if (data?.login) {
+     localStorage.setItem('authorization', data.login.token);
+   }
 
   const handleLogin = useCallback(
     async () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Button, Avatar, TextField, Paper, FormHelperText } from '@material-ui/core';
 import { Link, Grid, Typography, makeStyles } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -37,11 +37,11 @@ const Register = () => {
 	const [[hasError, errorMessage], setHasError] = useState([false, ''])
 	const history = useHistory();
 
-	const [createUser, { data, loading }] = useMutation(CREATE_USER, { fetchPolicy: 'no-cache' });
+	const onCompletedCallback = useCallback(() => { history.push('/') }, [history])
+	const [createUser, { data, loading }] = useMutation(CREATE_USER, { fetchPolicy: 'no-cache', onCompleted: onCompletedCallback });
 
 	if (data?.createUser) {
 		localStorage.setItem('authorization', data.createUser.token);
-		history.push('/')
 	}
 
 	const handleRegistration = async () => {
